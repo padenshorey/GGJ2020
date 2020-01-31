@@ -9,6 +9,8 @@ public class GameManager : MonoBehaviour {
     public PlayerController playerPrefab;
     private AudioManager audioManager;
 
+    private const int maxPlayers = 4;
+
 	void Awake () {
         if (instance == null)
             instance = this;
@@ -35,26 +37,18 @@ public class GameManager : MonoBehaviour {
     }
 
     private void SetupPlayers() {
-        if(Input.GetButtonDown("Start_1"))
+        for (int i = 1; i < maxPlayers + 1; i++)
         {
-            SpawnPlayer(1);
-        }
-        else if (Input.GetButtonDown("Start_2"))
-        {
-            SpawnPlayer(2);
-        }
-        else if (Input.GetButtonDown("Start_3"))
-        {
-            SpawnPlayer(3);
-        }
-        else if (Input.GetButtonDown("Start_4"))
-        {
-            SpawnPlayer(4);
+            if (Input.GetButtonDown("Start_" + i))
+            {
+                SpawnPlayer(i);
+            }
         }
     }
 
     private void SpawnPlayer(int controllerId) {
-        PlayerController player = Instantiate(playerPrefab);
-        player.controllerId = controllerId;
+        Debug.Log("Spawn Player " + controllerId);
+        //PlayerController player = Instantiate(playerPrefab);
+        //player.controllerId = controllerId;
     }
 }
