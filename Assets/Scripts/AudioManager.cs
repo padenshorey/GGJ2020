@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class AudioManager : MonoBehaviour {
 
-    public AudioClip[] fixes;
-    public AudioClip[] hits;
-    public AudioClip[] screams;
-    public AudioClip[] wooshes;
-    public AudioClip[] timers;
-    public AudioClip[] beeps;
-    public AudioClip[] steps;
+    public AudioClip[] pushes;
+    public AudioClip[] pulls;
+
     public AudioSource[] sources;
     AudioSource sfx;
     AudioSource soundtrack;
@@ -24,14 +20,11 @@ public class AudioManager : MonoBehaviour {
     {
         switch (code)
         {
-            case "fixes":
-                sfx.PlayOneShot(fixes[Random.Range(0, fixes.Length)]);
+            case "pushes":
+                sfx.PlayOneShot(pushes[Random.Range(0, pushes.Length)]);
                 break;
-            case "hits":
-                sfx.PlayOneShot(hits[Random.Range(0, hits.Length)]);
-                break;
-            case "steps":
-                sfx.PlayOneShot(steps[Random.Range(0, steps.Length)]);
+            case "pulls":
+                sfx.PlayOneShot(pulls[Random.Range(0, pulls.Length)]);
                 break;
         }
     }

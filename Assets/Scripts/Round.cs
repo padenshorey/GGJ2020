@@ -45,11 +45,6 @@ public class Round
     {
         Debug.Log("Ending round " + _roundNumber + " for Team " + _teamId);
 
-        foreach(InstructionCard ic in _intructions)
-        {
-            ic.currentInstructionCard.DisableCard();
-        }
-
         _roundComplete = true;
         OnRoundComplete();
     }
