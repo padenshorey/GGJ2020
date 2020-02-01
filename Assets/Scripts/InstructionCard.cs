@@ -5,37 +5,72 @@ using UnityEngine;
 public class InstructionCard : MonoBehaviour
 {
     private List<Repair> _repairs = new List<Repair>();
-
     private int _repairCount;
-
+    private int _currentRepairStep = 0;
     private bool _isSelected = false;
+    private Enums.InstructionType _repairType;
+    private bool _isComplete = false;
+    public bool IsComplete { get { return _isComplete; } }
 
-    private Enums.RepairType _repairType;
+    public delegate void EventHandler();
+    public event EventHandler OnCardComplete;
+
+    private List<XboxController> teamControllers = new List<XboxController>();
 
     void Update()
     {
-        if(_isSelected)
-        {
-            CheckForInput();
-            if(AllRepairsComplete())
-            {
-                FinishInstruction();
-            }
-        } 
+        //if(_isSelected)
+        //{
+            if(!_isComplete) CheckForInput();
+        //} 
     }
 
-    private void FinishInstruction()
+    private void FinishInstructionCard()
     {
         // is done
+        Debug.Log("Finished Instruction Card");
+        _isComplete = true;
+        OnCardComplete();
     }
 
     private void CheckForInput()
     {
         // make sure the input is done in sequence according to the repair order
+        bool repairComplete = false;
+        //Debug.Log("Check for input");
+        foreach(XboxController controller in teamControllers)
+        {
+            repairComplete = _repairs[_currentRepairStep].CheckForCompletion(controller);
+            if (repairComplete) break;
+        }
+
+        if(repairComplete)
+        {
+            string toDebug = "Repair Complete: ";
+            foreach(KeyValuePair<string, Enums.RepairType> keyValuePair in _repairs[_currentRepairStep].repairRequirements)
+            {
+                toDebug += keyValuePair.Key;
+                toDebug += " ";
+            }
+            
+
+            Debug.Log("Repair Complete: " + _repairs[_currentRepairStep].repairRequirements);
+            if(AllRepairsComplete())
+            {
+                FinishInstructionCard();
+            }
+            else
+            {
+                _currentRepairStep++;
+            }
+        }
     }
 
-    public InstructionCard(Enums.RepairType repairType, int repairCount)
+    public void Setup(Enums.InstructionType repairType, int repairCount, int teamId)
     {
+        Debug.Log(repairType.ToString() + " instruction card with " + repairCount + " repairs created.");
+
+        teamControllers = GameManager.instance.GetTeamControllers(teamId);
         _repairType = repairType;
         _repairCount = repairCount;
         GenerateRepairs();

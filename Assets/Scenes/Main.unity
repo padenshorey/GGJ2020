@@ -474,6 +474,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerPrefab: {fileID: -6332302858920008541, guid: cdc7132313fa5754da6505476df7b00f,
     type: 3}
+  _roundData:
+  - {fileID: 11400000, guid: 0b4a68b925d4d3e4a9895b9972ee5403, type: 2}
+  - {fileID: 11400000, guid: e5cee791a9e0d1e47a4b25a1579e3a4d, type: 2}
+  - {fileID: 11400000, guid: e4852f899fcef284f90c96f455265062, type: 2}
+  - {fileID: 11400000, guid: 238bc4e007177b148a19f8a5067151c5, type: 2}
+  - {fileID: 11400000, guid: 1cc08d0276815934793584d2655fb5d0, type: 2}
 --- !u!4 &1525827993
 Transform:
   m_ObjectHideFlags: 0

@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
     private XboxController _controller;
+    public XboxController Controller { get { return _controller; } }
     private int _controllerId;
     private int _playerId;
     public int PlayerID { get { return _playerId; } }

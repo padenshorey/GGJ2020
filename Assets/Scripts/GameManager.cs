@@ -17,11 +17,10 @@ public class GameManager : MonoBehaviour {
     private List<PlayerController> team2 = new List<PlayerController>();
     private int PlayerCount { get { return team1.Count + team2.Count; } }
 
-    private const int ROUND_COUNT = 4;
     private Game _currentGame;
 
     [SerializeField]
-    private RoundData[] _roundData;
+    private RoundData[] _roundData = null;
     public RoundData[] RoundData { get { return _roundData; } }
 
     void Awake () {
@@ -43,8 +42,7 @@ public class GameManager : MonoBehaviour {
     void StartGame()
     {
         Debug.Log("STARTING GAME");
-        _currentGame = new Game();
-        _currentGame.Setup(ROUND_COUNT);
+        _currentGame = new Game(_roundData.Length);
     }
 
     public void EndGame()
@@ -103,6 +101,27 @@ public class GameManager : MonoBehaviour {
         player.SetupPlayer(controllerId, AssignTeam(player));
     }
 
+    public List<XboxController> GetTeamControllers(int teamId)
+    {
+        List<XboxController> teamControllers = new List<XboxController>();
+        if (teamId == 1)
+        {
+            foreach(PlayerController pc in team1)
+            {
+                teamControllers.Add(pc.Controller);
+            }
+        }
+        else
+        {
+            foreach (PlayerController pc in team2)
+            {
+                teamControllers.Add(pc.Controller);
+            }
+        }
+
+        return teamControllers;
+    }
+
     private int AssignTeam(PlayerController pc)
     {
         int totalPlayers = team1.Count + team2.Count;
@@ -116,8 +135,5 @@ public class GameManager : MonoBehaviour {
             team2.Add(pc);
             return 2;
         }
-
-        Debug.LogError("Team NOT Assigned");
-        return 0;
     }
 }
