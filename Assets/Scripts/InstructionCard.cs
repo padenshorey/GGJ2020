@@ -1,12 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InstructionCard : MonoBehaviour
 {
     private const float INSTRUCTION_CARD_INPUT_DELAY = 0.5f;
 
     private List<Repair> _repairs = new List<Repair>();
+    private List<string> repairNames = new List<string>();
+    public GameObject instructionName;
     private int _repairCount;
     private int _currentRepairStep = 0;
     private bool _isSelected = false;
@@ -101,8 +104,19 @@ public class InstructionCard : MonoBehaviour
 
     public void GenerateRepairs()
     {
+        repairNames.Add("Fix the thingie");
+        repairNames.Add("turn the poop stick");
+        repairNames.Add("Ignite the flames of war");
+        repairNames.Add("Crank the shaft");
+        repairNames.Add("Dial in the finnagle");
+
+        
+        //Debug.Log(instructionName.GetComponent<Text>().text);
+
         for (int i = 0; i < _repairCount; i++)
         {
+            instructionName.GetComponent<Text>().text = repairNames[Random.Range(0,repairNames.Count)];
+
             _repairs.Add(new Repair());
         }
     }

@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour {
     public int PlayerCount { get { return team1.Count + team2.Count; } }
     public int Team1Count { get { return team1.Count; } }
     public int Team2Count { get { return team2.Count; } }
-
+    public Canvas GameCanvas;
     private Game _currentGame;
 
     [SerializeField]
@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour {
 
     public void CheckGameStart()
     {
-        if (PlayerCount < 2) return;
+        //if (PlayerCount < 2) return; //PUT THIS BACK IN
 
         bool startGame = true;
         

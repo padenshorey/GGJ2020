@@ -66,7 +66,7 @@ public class Round
         for(int i = 0; i < cardCount; i++)
         {
             GameObject cardPrefab = Resources.Load("InstructionCard") as GameObject;
-            GameObject card = GameObject.Instantiate(cardPrefab);
+            GameObject card = GameObject.Instantiate(cardPrefab, GameManager.instance.GameCanvas.transform);
             InstructionCard currentInstructionCard = card.GetComponent<InstructionCard>();
             currentInstructionCard.Setup(GetRepairType(), (int)UnityEngine.Random.Range(GameManager.instance.RoundData[_roundNumber - 1].MinRepairCount, GameManager.instance.RoundData[_roundNumber - 1].MaxRepairCount), _teamId);
             currentInstructionCard.OnCardComplete += CheckRoundComplete;
