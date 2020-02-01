@@ -18,8 +18,12 @@ public class SprintSequence : MonoBehaviour
     public delegate void EventHandler(int team);
     public event EventHandler OnSprintComplete;
 
+    private AudioManager audioManager;
+
     public void Setup(SprintData sprintData, int team)
     {
+        audioManager = FindObjectOfType<AudioManager>();
+
         _teamId = team;
         GenerateSprintInputs(sprintData);
         StartSprint();
@@ -57,6 +61,10 @@ public class SprintSequence : MonoBehaviour
         {
             if(Input.GetButtonDown(_sprintInputSequence[_currentSprintSequenceIndex].ButtonToMash + controller.controllerId))
             {
+                Debug.Log("YOO");
+
+                audioManager.PlaySound("steps");
+
                 _sprintInputSequence[_currentSprintSequenceIndex].ButtonPressCount++;
                 totalText.text = _sprintInputSequence[_currentSprintSequenceIndex].ButtonPressCount.ToString();
                 if (_sprintInputSequence[_currentSprintSequenceIndex].ButtonPressCount >= _sprintInputSequence[_currentSprintSequenceIndex].ButtonPressTarget)

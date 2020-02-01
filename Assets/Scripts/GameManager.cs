@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
+    public PlayerController playerPrefab;
     public PlayerController[] players;
-  
     private AudioManager audioManager;
 
     private const float TIME_UNTIL_GAME_RESET = 3;
@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private SprintData[] _sprintData = null;
     public SprintData[] SprintData { get { return _sprintData; } }
+
+    public InstructionCardFrame[] instructionCardFramesTeam1;
+    public InstructionCardFrame[] instructionCardFramesTeam2;
 
     void Awake () {
         if (instance == null)
@@ -113,7 +116,6 @@ public class GameManager : MonoBehaviour {
 
     private void SpawnPlayer(int controllerId) {
 
-
         if (GameManager.instance.GameInProgress)
         {
             Debug.Log("You cannot join while the game in in progress");
@@ -127,10 +129,8 @@ public class GameManager : MonoBehaviour {
         PlayerController player = Instantiate(players[PlayerCount], playerLocation.transform);
 
         playerLocation.GetComponent<SpriteRenderer>().enabled = false;
+
         player.SetupPlayer(controllerId, AssignTeam(player));
-
-
-        
     }
 
     public List<XboxController> GetTeamControllers(int teamId)
