@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour {
     private List<PlayerController> team1 = new List<PlayerController>();
     private List<PlayerController> team2 = new List<PlayerController>();
     private int PlayerCount { get { return team1.Count + team2.Count; } }
-
+    public Canvas GameCanvas;
     private Game _currentGame;
 
     [SerializeField]
@@ -52,7 +52,7 @@ public class GameManager : MonoBehaviour {
 
     public void CheckGameStart()
     {
-        if (PlayerCount < 2) return;
+        //if (PlayerCount < 2) return; //PUT THIS BACK IN
 
         bool startGame = true;
         
