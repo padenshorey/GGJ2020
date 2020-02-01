@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class InstructionCard : MonoBehaviour
 {
+    private const float INSTRUCTION_CARD_INPUT_DELAY = 0.5f;
+
     private List<Repair> _repairs = new List<Repair>();
     private int _repairCount;
     private int _currentRepairStep = 0;
     private bool _isSelected = false;
     private Enums.InstructionType _repairType;
     private bool _isComplete = false;
+    private bool _canRepair = false;
     public bool IsComplete { get { return _isComplete; } }
 
     public delegate void EventHandler();
@@ -21,13 +24,12 @@ public class InstructionCard : MonoBehaviour
     {
         //if(_isSelected)
         //{
-            if(!_isComplete) CheckForInput();
+            if(!_isComplete && _canRepair) CheckForInput();
         //} 
     }
 
     private void FinishInstructionCard()
     {
-        // is done
         Debug.Log("Finished Instruction Card");
         _isComplete = true;
         OnCardComplete();
@@ -48,12 +50,13 @@ public class InstructionCard : MonoBehaviour
         // if the repair is complete, continue to the next repair or finish the instruction card
         if(repairComplete)
         {
+            /*
             string toDebug = "Repair Complete: ";
             foreach(KeyValuePair<string, Enums.RepairType> keyValuePair in _repairs[_currentRepairStep].repairRequirements)
             {
                 toDebug += keyValuePair.Key;
                 toDebug += " ";
-            }
+            }*/
             
 
             Debug.Log("Repair Complete: " + _repairs[_currentRepairStep].repairRequirements);
@@ -63,6 +66,8 @@ public class InstructionCard : MonoBehaviour
             }
             else
             {
+                _canRepair = false;
+                StartCoroutine(ActivateUserInput());
                 _currentRepairStep++;
             }
         }
@@ -76,6 +81,14 @@ public class InstructionCard : MonoBehaviour
         _repairType = repairType;
         _repairCount = repairCount;
         GenerateRepairs();
+
+        StartCoroutine(ActivateUserInput());
+    }
+
+    IEnumerator ActivateUserInput()
+    {
+        yield return new WaitForSeconds(INSTRUCTION_CARD_INPUT_DELAY);
+        _canRepair = true;
     }
 
     public void GenerateRepairs()

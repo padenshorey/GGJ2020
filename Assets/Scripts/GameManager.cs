@@ -136,4 +136,23 @@ public class GameManager : MonoBehaviour {
             return 2;
         }
     }
+
+    public bool CheckAllButtonsUp(XboxController controller)
+    {
+        if(Input.GetButtonDown(controller.a) ||
+           Input.GetButtonDown(controller.b) ||
+           Input.GetButtonDown(controller.x) ||
+           Input.GetButtonDown(controller.y) ||
+           Input.GetButtonDown(controller.rb) ||
+           Input.GetButtonDown(controller.lb) ||
+           Input.GetAxisRaw(controller.joyRightHori) > 0.1f ||
+           Input.GetAxisRaw(controller.joyRightHori) < -0.1f ||
+           Input.GetAxisRaw(controller.joyLeftClick) > 0.1f ||
+           Input.GetAxisRaw(controller.joyLeftClick) < -0.1f)
+        {
+            return false;
+        }
+
+        return true;
+    }
 }

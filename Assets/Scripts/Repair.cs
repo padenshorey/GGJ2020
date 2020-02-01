@@ -27,8 +27,8 @@ public class Repair : MonoBehaviour
             switch(keyValuePair.Value)
             {
                 case Enums.RepairType.StickDirection:
-                    if ((Input.GetAxis(controller.joyRightHori) - Enums.StickRepairDirectionValues[keyValuePair.Key][0]) > 0.3f &&
-                        (Input.GetAxis(controller.joyRightVert) - Enums.StickRepairDirectionValues[keyValuePair.Key][1]) > 0.3f)
+                    if (Input.GetAxisRaw(controller.joyRightHori) != Enums.StickRepairDirectionValues[keyValuePair.Key][0] ||
+                        Input.GetAxisRaw(controller.joyRightVert) != Enums.StickRepairDirectionValues[keyValuePair.Key][1])
                     {
                         _isComplete = false;
                         return _isComplete;
