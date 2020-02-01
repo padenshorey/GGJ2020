@@ -9,10 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 49091a30174e19d4c996e5dd28c42f96, type: 3}
-  m_Name: RoundData5
+  m_Script: {fileID: 11500000, guid: 6351c2ec4458c05489356a541ab4ecea, type: 3}
+  m_Name: SprintData3
   m_EditorClassIdentifier: 
-  RoundDuration: 60
-  InstructionCardCount: 1
-  MinRepairCount: 1
-  MaxRepairCount: 1
+  numberOfPressesRequired: 5
+  numberOfButtons: 2

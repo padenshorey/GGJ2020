@@ -8,6 +8,9 @@ public class Game
     private Round _currentRoundTeam1;
     private Round _currentRoundTeam2;
 
+    private int _currentSprintTeam1 = 0;
+    private int _currentSprintTeam2 = 0;
+
     private List<Round> _team1CompletedRounds = new List<Round>();
     private List<Round> _team2CompletedRounds = new List<Round>();
     public Game(int roundCount)
@@ -18,14 +21,52 @@ public class Game
 
     public void StartGame()
     {
-        _currentRoundTeam1 = StartRound(1, 1);
-        _currentRoundTeam2 = StartRound(1, 2);
+        StartNextSprintSequence(1);
+        StartNextSprintSequence(2);
+    }
+
+    public void StartNextSprintSequence(int team)
+    {
+        GameObject sprintPrefab = Resources.Load("SprintSequence") as GameObject;
+        GameObject sprint = GameObject.Instantiate(sprintPrefab, GameManager.instance.GameCanvas.transform.Find("Team" + team.ToString()));
+        SprintSequence currentSprintSequence = sprint.GetComponent<SprintSequence>();
+        currentSprintSequence.Setup(GameManager.instance.SprintData[team == 1 ? _currentSprintTeam1 : _currentSprintTeam2], team);
+        currentSprintSequence.OnSprintComplete += OnSprintComplete;
+    }
+
+    private void OnSprintComplete(int team)
+    {
+        switch (team)
+        {
+            case 1:
+                _currentSprintTeam1++;
+                if (_currentSprintTeam1 >= GameManager.instance.SprintData.Length)
+                {
+                    EndGame(1);
+                    return;
+                }
+                _currentRoundTeam1 = StartRound(_team1CompletedRounds.Count+1, 1);
+                break;
+            case 2:
+                _currentSprintTeam2++;
+                if (_currentSprintTeam2 >= GameManager.instance.SprintData.Length)
+                {
+                    EndGame(2);
+                    return;
+                }
+                _currentRoundTeam2 = StartRound(_team2CompletedRounds.Count + 1, 2);
+                break;
+            default:
+                break;
+        }
     }
 
     public void EndGame(int winningTeamId)
     {
-        //TODO: Handle Game End
+        //TODO: Handle end game animations (or whatever we want to happen).
         Debug.Log("TEAM " + winningTeamId + " WINS!");
+
+        GameManager.instance.EndGame();
     }
 
     public void CheckRoundsComplete()
@@ -33,26 +74,12 @@ public class Game
         if (_currentRoundTeam1.RoundComplete)
         {
             _team1CompletedRounds.Add(_currentRoundTeam1);
-            if (_currentRoundTeam1.RoundNumber == _roundCount)
-            {
-                EndGame(1);
-            }
-            else
-            {
-                _currentRoundTeam1 = StartRound(_currentRoundTeam1.RoundNumber + 1, 1);
-            }
+            StartNextSprintSequence(1);
         }
         else if (_currentRoundTeam2.RoundComplete)
         {
             _team2CompletedRounds.Add(_currentRoundTeam2);
-            if (_currentRoundTeam2.RoundNumber == _roundCount)
-            {
-                EndGame(2);
-            }
-            else
-            {
-                _currentRoundTeam2 = StartRound(_currentRoundTeam2.RoundNumber + 1, 2);
-            }
+            StartNextSprintSequence(2);
         }
     }
 

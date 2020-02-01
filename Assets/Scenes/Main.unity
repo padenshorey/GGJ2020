@@ -611,6 +611,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: e4852f899fcef284f90c96f455265062, type: 2}
   - {fileID: 11400000, guid: 238bc4e007177b148a19f8a5067151c5, type: 2}
   - {fileID: 11400000, guid: 1cc08d0276815934793584d2655fb5d0, type: 2}
+  _sprintData:
+  - {fileID: 11400000, guid: d2eeeb42d71652544b419eaf3e3b00cb, type: 2}
+  - {fileID: 11400000, guid: 846785c6c74b8e244b17c10e4f54e1c7, type: 2}
+  - {fileID: 11400000, guid: 03d55ce64358bc24886c2521422f5498, type: 2}
+  - {fileID: 11400000, guid: 53ca4eda717af614c9f0e1526a1925aa, type: 2}
+  - {fileID: 11400000, guid: 5fc8bc6f3634a9d43858ef70e3a466ca, type: 2}
+  - {fileID: 11400000, guid: 7141310226cc2bb4e962e6cf1810c2aa, type: 2}
 --- !u!4 &1525827993
 Transform:
   m_ObjectHideFlags: 0

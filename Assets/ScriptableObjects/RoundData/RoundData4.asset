@@ -15,4 +15,4 @@ MonoBehaviour:
   RoundDuration: 45
   InstructionCardCount: 1
   MinRepairCount: 1
-  MaxRepairCount: 2
+  MaxRepairCount: 1

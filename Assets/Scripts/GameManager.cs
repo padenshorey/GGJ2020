@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour {
     public PlayerController playerPrefab;
     private AudioManager audioManager;
 
-    private const int maxPlayers = 4;
+    private const float TIME_UNTIL_GAME_RESET = 3;
+    private const int MAX_PLAYERS = 4;
     private bool _gameInProgress = false;
     public bool GameInProgress { get { return _gameInProgress; } }
 
@@ -24,6 +25,10 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     private RoundData[] _roundData = null;
     public RoundData[] RoundData { get { return _roundData; } }
+
+    [SerializeField]
+    private SprintData[] _sprintData = null;
+    public SprintData[] SprintData { get { return _sprintData; } }
 
     void Awake () {
         if (instance == null)
@@ -49,7 +54,13 @@ public class GameManager : MonoBehaviour {
 
     public void EndGame()
     {
+        StartCoroutine(ResetGame());
+    }
 
+    IEnumerator ResetGame()
+    {
+        yield return new WaitForSeconds(TIME_UNTIL_GAME_RESET);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void CheckGameStart()
@@ -73,7 +84,7 @@ public class GameManager : MonoBehaviour {
 
     //PLAYER CODE
     private void SetupPlayers() {
-        for (int i = 1; i < maxPlayers + 1; i++)
+        for (int i = 1; i < MAX_PLAYERS + 1; i++)
         {
             if (Input.GetButtonDown("Start_" + i) && !PlayerHasSpawned(i))
             {
