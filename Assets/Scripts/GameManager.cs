@@ -30,6 +30,9 @@ public class GameManager : MonoBehaviour {
     private SprintData[] _sprintData = null;
     public SprintData[] SprintData { get { return _sprintData; } }
 
+    public InstructionCardFrame[] instructionCardFramesTeam1;
+    public InstructionCardFrame[] instructionCardFramesTeam2;
+
     void Awake () {
         if (instance == null)
             instance = this;
