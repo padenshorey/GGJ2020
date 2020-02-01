@@ -31,11 +31,7 @@ public class Enums
         "Up",
         "Down",
         "Left",
-        "Right",
-        "Up/Left",
-        "Up/Right",
-        "Down/Left",
-        "Down/Right"
+        "Right"
     };
 
     public static Dictionary<string, float[]> StickRepairDirectionValues = new Dictionary<string, float[]>()
@@ -43,10 +39,6 @@ public class Enums
         {"Up", new float[]{0, -1} },
         {"Down", new float[]{0, 1} },
         {"Left", new float[]{-1, 0} },
-        {"Right", new float[]{1, 0} },
-        {"Up/Left", new float[]{-1, -1} },
-        {"Up/Right", new float[]{1, -1} },
-        {"Down/Left", new float[]{-1, 1} },
-        {"Down/Right", new float[]{1, 1} }
+        {"Right", new float[]{1, 0} }
     };
 }

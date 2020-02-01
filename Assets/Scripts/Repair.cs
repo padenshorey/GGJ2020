@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class Repair : MonoBehaviour
 {
-    // button press
-    // button combo press
-    // right stick movements
+    private const float REPAIR_BUTTON_PRESS_WEIGHT = 10f;
+    private const float REPAIR_BUTTON_COMBO_WEIGHT = 2f;
+    private const float REPAIR_STICK_DIRECTION_WEIGHT = 2f;
 
     private bool _isComplete = false;
     public bool IsComplete { get { return _isComplete; } }
@@ -27,8 +27,8 @@ public class Repair : MonoBehaviour
             switch(keyValuePair.Value)
             {
                 case Enums.RepairType.StickDirection:
-                    if ((Input.GetAxis(controller.joyRightHori) - Enums.StickRepairDirectionValues[keyValuePair.Key][0]) > 0.1f &&
-                        (Input.GetAxis(controller.joyRightVert) - Enums.StickRepairDirectionValues[keyValuePair.Key][1]) > 0.1f)
+                    if ((Input.GetAxis(controller.joyRightHori) - Enums.StickRepairDirectionValues[keyValuePair.Key][0]) > 0.3f &&
+                        (Input.GetAxis(controller.joyRightVert) - Enums.StickRepairDirectionValues[keyValuePair.Key][1]) > 0.3f)
                     {
                         _isComplete = false;
                         return _isComplete;
@@ -47,18 +47,19 @@ public class Repair : MonoBehaviour
         _isComplete = true;
         return _isComplete;
     }
-    
+
     private void GenerateRepairRequirements()
     {
-        int typeOfRepair = Random.Range(0, 10);
+        float typeOfRepair = Random.Range(0f, 1f);
+        float totalWeight = REPAIR_BUTTON_PRESS_WEIGHT + REPAIR_BUTTON_COMBO_WEIGHT + REPAIR_STICK_DIRECTION_WEIGHT;
 
-        if(typeOfRepair < 8)
+        if (typeOfRepair < (REPAIR_BUTTON_PRESS_WEIGHT/totalWeight))
         {
             //button press
             _repairType = Enums.RepairType.ButtonPress;
             repairRequirements.Add(Enums.RepairButtons[(int)Random.Range(0, Enums.RepairButtons.Length)], _repairType);
         }
-        else if(typeOfRepair < 11)
+        else if(typeOfRepair < ((REPAIR_BUTTON_PRESS_WEIGHT + REPAIR_BUTTON_COMBO_WEIGHT)/ totalWeight))
         {
             // button combo press
             _repairType = Enums.RepairType.ComboButtonPress;

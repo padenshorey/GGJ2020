@@ -36,14 +36,16 @@ public class InstructionCard : MonoBehaviour
     private void CheckForInput()
     {
         // make sure the input is done in sequence according to the repair order
+
+        // check to see if the repair is complete
         bool repairComplete = false;
-        //Debug.Log("Check for input");
         foreach(XboxController controller in teamControllers)
         {
             repairComplete = _repairs[_currentRepairStep].CheckForCompletion(controller);
             if (repairComplete) break;
         }
 
+        // if the repair is complete, continue to the next repair or finish the instruction card
         if(repairComplete)
         {
             string toDebug = "Repair Complete: ";
