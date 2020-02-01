@@ -4,7 +4,7 @@ using static Enums;
 
 public class Round 
 {
-    private const int TEAM_INSTRUCTION_CARD_PROBABILITY = 20;
+    private const int TEAM_INSTRUCTION_CARD_PROBABILITY = 80;
 
     private int _teamId;
     private float _roundDuration;
@@ -76,6 +76,16 @@ public class Round
 
     private InstructionType GetRepairType()
     {
+        // make sure no team instructions are given to solo teams
+        if(_teamId == 1)
+        {
+            if (GameManager.instance.Team1Count < 2) return InstructionType.Solo;
+        }
+        else
+        {
+            if (GameManager.instance.Team2Count < 2) return InstructionType.Solo;
+        }
+
         //TODO: Figure out how to decide this
         int randomNum = (int)UnityEngine.Random.Range(0f, 100f);
         if (randomNum > TEAM_INSTRUCTION_CARD_PROBABILITY) return InstructionType.Solo;

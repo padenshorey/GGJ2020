@@ -15,7 +15,9 @@ public class GameManager : MonoBehaviour {
 
     private List<PlayerController> team1 = new List<PlayerController>();
     private List<PlayerController> team2 = new List<PlayerController>();
-    private int PlayerCount { get { return team1.Count + team2.Count; } }
+    public int PlayerCount { get { return team1.Count + team2.Count; } }
+    public int Team1Count { get { return team1.Count; } }
+    public int Team2Count { get { return team2.Count; } }
 
     private Game _currentGame;
 
@@ -36,7 +38,7 @@ public class GameManager : MonoBehaviour {
 	
 	void Update () {
         SetupPlayers();
-	}
+    }
 
     // GAME LOOP CODE
     void StartGame()

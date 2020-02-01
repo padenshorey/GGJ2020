@@ -20,31 +20,50 @@ public class Repair : MonoBehaviour
         GenerateRepairRequirements();
     }
 
-    public bool CheckForCompletion(XboxController controller)
+    public bool CheckForCompletion(XboxController controller1, XboxController controller2 = null)
     {
+        _isComplete = true;
+
         foreach (KeyValuePair<string, Enums.RepairType> keyValuePair in repairRequirements)
         {
-            switch(keyValuePair.Value)
+            if (keyValuePair.Value == Enums.RepairType.StickDirection)
             {
-                case Enums.RepairType.StickDirection:
-                    if (Input.GetAxisRaw(controller.joyRightHori) != Enums.StickRepairDirectionValues[keyValuePair.Key][0] ||
-                        Input.GetAxisRaw(controller.joyRightVert) != Enums.StickRepairDirectionValues[keyValuePair.Key][1])
+                if (Input.GetAxisRaw(controller1.joyRightHori) == Enums.StickRepairDirectionValues[keyValuePair.Key][0] &&
+                    Input.GetAxisRaw(controller1.joyRightVert) == Enums.StickRepairDirectionValues[keyValuePair.Key][1])
+                {
+                    if (controller2 != null)
                     {
-                        _isComplete = false;
-                        return _isComplete;
+                        if (Input.GetAxisRaw(controller2.joyRightHori) != Enums.StickRepairDirectionValues[keyValuePair.Key][0] ||
+                            Input.GetAxisRaw(controller2.joyRightVert) != Enums.StickRepairDirectionValues[keyValuePair.Key][1])
+                        {
+                            _isComplete = false;
+                        }
                     }
-                    break;
-                default:
-                    if (!Input.GetButtonDown(keyValuePair.Key + controller.controllerId))
+                }
+                else
+                {
+                    _isComplete = false;
+                }
+            }
+            else
+            {
+                if (Input.GetButtonDown(keyValuePair.Key + controller1.controllerId))
+                {
+                    if (controller2 != null)
                     {
-                        _isComplete = false;
-                        return _isComplete;
+                        if (!Input.GetButtonDown(keyValuePair.Key + controller2.controllerId))
+                        {
+                            _isComplete = false;
+                        }
                     }
-                    break;
+                }
+                else
+                {
+                    _isComplete = false;
+                }
             }
         }
 
-        _isComplete = true;
         return _isComplete;
     }
 

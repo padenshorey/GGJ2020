@@ -10,7 +10,7 @@ public class InstructionCard : MonoBehaviour
     private int _repairCount;
     private int _currentRepairStep = 0;
     private bool _isSelected = false;
-    private Enums.InstructionType _repairType;
+    private Enums.InstructionType _instructionType;
     private bool _isComplete = false;
     private bool _canRepair = false;
     public bool IsComplete { get { return _isComplete; } }
@@ -41,10 +41,18 @@ public class InstructionCard : MonoBehaviour
 
         // check to see if the repair is complete
         bool repairComplete = false;
-        foreach(XboxController controller in teamControllers)
+
+        if (_instructionType == Enums.InstructionType.Solo)
         {
-            repairComplete = _repairs[_currentRepairStep].CheckForCompletion(controller);
-            if (repairComplete) break;
+            foreach (XboxController controller in teamControllers)
+            {
+                repairComplete = _repairs[_currentRepairStep].CheckForCompletion(controller);
+                if (repairComplete) break;
+            }
+        }
+        else
+        {
+            repairComplete = _repairs[_currentRepairStep].CheckForCompletion(teamControllers[0], teamControllers[1]);
         }
 
         // if the repair is complete, continue to the next repair or finish the instruction card
@@ -78,7 +86,7 @@ public class InstructionCard : MonoBehaviour
         Debug.Log(repairType.ToString() + " instruction card with " + repairCount + " repairs created.");
 
         teamControllers = GameManager.instance.GetTeamControllers(teamId);
-        _repairType = repairType;
+        _instructionType = repairType;
         _repairCount = repairCount;
         GenerateRepairs();
 
