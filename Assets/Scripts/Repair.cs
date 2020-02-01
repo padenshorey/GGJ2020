@@ -20,6 +20,8 @@ public class Repair : MonoBehaviour
         GenerateRepairRequirements();
     }
 
+
+
     public bool CheckForCompletion(XboxController controller1, XboxController controller2 = null)
     {
         _isComplete = true;
