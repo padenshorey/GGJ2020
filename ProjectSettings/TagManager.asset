@@ -10,6 +10,7 @@ TagManager:
   - Player2Location
   - Player3Location
   - Player4Location
+  - Cone
   layers:
   - Default
   - TransparentFX

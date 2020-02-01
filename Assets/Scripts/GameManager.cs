@@ -51,6 +51,8 @@ public class GameManager : MonoBehaviour {
     {
         Debug.Log("STARTING GAME");
         _currentGame = new Game(_roundData.Length);
+        _gameInProgress = true;
+        
     }
 
     public void EndGame()
@@ -66,7 +68,7 @@ public class GameManager : MonoBehaviour {
 
     public void CheckGameStart()
     {
-        //if (PlayerCount < 2) return; //PUT THIS BACK IN
+        if (PlayerCount < 2) return; //PUT THIS BACK IN
 
         bool startGame = true;
         
@@ -110,10 +112,19 @@ public class GameManager : MonoBehaviour {
     }
 
     private void SpawnPlayer(int controllerId) {
-        Debug.Log("Spawn Player " + controllerId);
 
-        GameObject playerLocation = GameObject.FindGameObjectWithTag("Player" + controllerId + "Location");
-        PlayerController player = Instantiate(players[controllerId-1], playerLocation.transform);
+
+        if (GameManager.instance.GameInProgress)
+        {
+            Debug.Log("You cannot join while the game in in progress");
+            return;
+        }
+     
+
+        Debug.Log("Spawn Player with controller " + controllerId);
+
+        GameObject playerLocation = GameObject.FindGameObjectWithTag("Player" + (PlayerCount+1) + "Location");
+        PlayerController player = Instantiate(players[PlayerCount], playerLocation.transform);
 
         playerLocation.GetComponent<SpriteRenderer>().enabled = false;
         player.SetupPlayer(controllerId, AssignTeam(player));
