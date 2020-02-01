@@ -1538,7 +1538,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: e8991916dd31b2c4eaf3883282a9bc26, type: 3}
+  m_Sprite: {fileID: 21300000, guid: cbb334b07824a2b47a84f988fe92d862, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -4580,6 +4580,26 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6327712879809978473, guid: 5b3e12f93f8eb1f4f81f52c9cb2f7035,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 962856411186428768, guid: 5b3e12f93f8eb1f4f81f52c9cb2f7035,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].x
+      value: 174.07867
+      objectReference: {fileID: 0}
+    - target: {fileID: 962856411186428768, guid: 5b3e12f93f8eb1f4f81f52c9cb2f7035,
+        type: 3}
+      propertyPath: m_Positions.Array.data[1].y
+      value: 50.430862
+      objectReference: {fileID: 0}
+    - target: {fileID: 1219360261171380532, guid: 5b3e12f93f8eb1f4f81f52c9cb2f7035,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5b3e12f93f8eb1f4f81f52c9cb2f7035, type: 3}

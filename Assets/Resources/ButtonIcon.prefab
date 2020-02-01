@@ -95,7 +95,7 @@ MonoBehaviour:
   buttonX: {fileID: 21300000, guid: 9222141e9de669d41916414f3326c7e0, type: 3}
   buttonRB: {fileID: 21300000, guid: cc06d73ef8752c04e964c77e4754682c, type: 3}
   buttonLB: {fileID: 21300000, guid: 527271466f562ec43b7f80017bd4c6e2, type: 3}
-  buttonUp: {fileID: 21300000, guid: 45b6e0caaae5b3a42b16fbedde20549d, type: 3}
-  buttonDown: {fileID: 21300000, guid: b06fa4535f2310449b5d3d91965d9efd, type: 3}
-  buttonLeft: {fileID: 21300000, guid: b564ddd26e7d96e47874ab669a3cc25e, type: 3}
-  buttonRight: {fileID: 21300000, guid: 7051b66130a416945811e3059b32283c, type: 3}
+  buttonUp: {fileID: 21300000, guid: 797791d3f1036c04f992a72b9ed763f5, type: 3}
+  buttonDown: {fileID: 21300000, guid: 60ea2ccc7ac3d1b4c89ca0efa1dca76f, type: 3}
+  buttonLeft: {fileID: 21300000, guid: e6c2b81ec9ebbd54cbeb26190673e697, type: 3}
+  buttonRight: {fileID: 21300000, guid: 6c2f8b468cd38304faa8f1fc0b572231, type: 3}
