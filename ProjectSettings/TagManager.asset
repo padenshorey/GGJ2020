@@ -3,7 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - active-sprite
+  - inactive-sprite
+  - Player1Location
+  - Player2Location
+  - Player3Location
+  - Player4Location
   layers:
   - Default
   - TransparentFX

@@ -6,7 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
-    public PlayerController playerPrefab;
+    public PlayerController[] players;
+  
     private AudioManager audioManager;
 
     private const int maxPlayers = 4;
@@ -99,8 +100,15 @@ public class GameManager : MonoBehaviour {
 
     private void SpawnPlayer(int controllerId) {
         Debug.Log("Spawn Player " + controllerId);
-        PlayerController player = Instantiate(playerPrefab, transform);
+
+        GameObject playerLocation = GameObject.FindGameObjectWithTag("Player" + controllerId + "Location");
+        PlayerController player = Instantiate(players[controllerId-1], playerLocation.transform);
+
+        playerLocation.GetComponent<SpriteRenderer>().enabled = false;
         player.SetupPlayer(controllerId, AssignTeam(player));
+
+
+        
     }
 
     public List<XboxController> GetTeamControllers(int teamId)
