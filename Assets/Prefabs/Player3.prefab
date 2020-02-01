@@ -92,7 +92,7 @@ Animator:
   m_GameObject: {fileID: 1907407938}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: a6cc7c15c87641f4a9130b6faf75f184, type: 2}
+  m_Controller: {fileID: 9100000, guid: 6e9686209c5e61746af214fde28367e1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -113,7 +113,7 @@ GameObject:
   - component: {fileID: 3264092890607812329}
   - component: {fileID: 3264092890607812328}
   m_Layer: 0
-  m_Name: mechanic-sprite-2_0
+  m_Name: mechanic-sprite-3_0
   m_TagString: active-sprite
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
