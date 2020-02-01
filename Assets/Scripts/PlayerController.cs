@@ -18,8 +18,8 @@ public class PlayerController : MonoBehaviour {
 	
     void Awake()
     {
-        _sprite = GetComponent<SpriteRenderer>();
-        if (!_sprite) Debug.LogError("Player " + gameObject.name + " does not have a Sprite Renderer");
+        /*_sprite = GetComponent<SpriteRenderer>();
+        if (!_sprite) Debug.LogError("Player " + gameObject.name + " does not have a Sprite Renderer");*/
     }
 
 	void Update ()
@@ -35,7 +35,7 @@ public class PlayerController : MonoBehaviour {
 
         SetupControls(_controllerId);
         //assign random color based on team 
-        _sprite.color = teamId == 1 ? new Color(Random.Range(0.5f, 1f), Random.Range(0f, 0.3f), Random.Range(0f, 0.3f)) : new Color(Random.Range(0f, 0.3f), Random.Range(0f, 0.3f), Random.Range(0.5f, 1f));
+       // _sprite.color = teamId == 1 ? new Color(Random.Range(0.5f, 1f), Random.Range(0f, 0.3f), Random.Range(0f, 0.3f)) : new Color(Random.Range(0f, 0.3f), Random.Range(0f, 0.3f), Random.Range(0.5f, 1f));
     }
 
     private void SetupControls(int id)
@@ -58,7 +58,29 @@ public class PlayerController : MonoBehaviour {
     {
         _readyToPlay = true;
         //indicate ready status
-        transform.Rotate(new Vector3(0, 0, 1f), 45);
+        //transform.Rotate(new Vector3(0, 0, 1f), 45);
+
+        SpriteRenderer[] playerSprites = transform.gameObject.GetComponentsInChildren<SpriteRenderer>();
+
+        foreach (SpriteRenderer mysprite in playerSprites)
+        {
+            if(mysprite.gameObject.tag.Equals( "active-sprite"))
+            {
+                mysprite.transform.gameObject.tag = "inactive-sprite";
+                mysprite.transform.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = false;
+            }
+            else if( mysprite.gameObject.tag.Equals("inactive-sprite"))
+            {
+                mysprite.transform.gameObject.tag = "active-sprite";
+                mysprite.transform.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
+            }
+        }
+
         GameManager.instance.CheckGameStart();
+
+
     }
+
+       
+    
 }
