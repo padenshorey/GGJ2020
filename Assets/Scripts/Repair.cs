@@ -26,6 +26,8 @@ public class Repair
     {
         _isComplete = true;
 
+        //Debug.Log("Checking Controller " + controller1.controllerId + " for completion of " + _repairType);
+
         foreach (KeyValuePair<string, Enums.RepairType> keyValuePair in repairRequirements)
         {
             if (keyValuePair.Value == Enums.RepairType.StickDirection)

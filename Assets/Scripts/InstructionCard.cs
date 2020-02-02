@@ -12,8 +12,9 @@ public class InstructionCard : MonoBehaviour
     private List<string> repairNames = new List<string>();
     private int _repairCount;
     private int _currentRepairStep = 0;
-    private bool _isSelected = false;
+    public bool isSelected = false;
     private Enums.InstructionType _instructionType;
+    public Enums.InstructionType InstructionType { get { return _instructionType; } }
     private bool _isComplete = false;
     private bool _canRepair = false;
     public bool IsComplete { get { return _isComplete; } }
@@ -27,10 +28,10 @@ public class InstructionCard : MonoBehaviour
 
     void Update()
     {
-        //if(_isSelected)
-        //{
+        if(isSelected)
+        {
             if(!_isComplete && _canRepair) CheckForInput();
-        //} 
+        } 
     }
 
     private void FinishInstructionCard()
@@ -51,8 +52,19 @@ public class InstructionCard : MonoBehaviour
         {
             foreach (XboxController controller in teamControllers)
             {
-                repairComplete = _repairs[_currentRepairStep].CheckForCompletion(controller);
-                if (repairComplete) break;
+                if (!repairComplete)
+                {
+                    foreach (PlayerController pc in _teamId == 1 ? GameManager.instance.team1 : GameManager.instance.team2)
+                    {
+                        if (controller.controllerId == pc.ControllerId &&
+                            pc.currentSelectedColumn == currentInstructionCard.columnId &&
+                            pc.currentSelectedRow == currentInstructionCard.rowId)
+                        {
+                            repairComplete = _repairs[_currentRepairStep].CheckForCompletion(controller);
+                            if (repairComplete) break;
+                        }
+                    }
+                }
             }
         }
         else

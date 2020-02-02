@@ -18,8 +18,8 @@ public class GameManager : MonoBehaviour {
     private bool _gameInProgress = false;
     public bool GameInProgress { get { return _gameInProgress; } }
 
-    private List<PlayerController> team1 = new List<PlayerController>();
-    private List<PlayerController> team2 = new List<PlayerController>();
+    public List<PlayerController> team1 = new List<PlayerController>();
+    public List<PlayerController> team2 = new List<PlayerController>();
     public int PlayerCount { get { return team1.Count + team2.Count; } }
     public int Team1Count { get { return team1.Count; } }
     public int Team2Count { get { return team2.Count; } }
@@ -128,6 +128,8 @@ public class GameManager : MonoBehaviour {
 
         GameObject playerLocation = GameObject.FindGameObjectWithTag("Player" + (PlayerCount + 1) + "Location");
         PlayerController player = Instantiate(players[PlayerCount], playerLocation.transform);
+        player.transform.localPosition = Vector3.zero;
+        player.SetPlayerObject(players[PlayerCount].gameObject);
 
         playerLocation.GetComponent<SpriteRenderer>().enabled = false;
         player.SetupPlayer(controllerId, AssignTeam(player));
@@ -167,6 +169,80 @@ public class GameManager : MonoBehaviour {
             team2.Add(pc);
             return 2;
         }
+    }
+
+    public void SetInstructionCardSelectedState(InstructionCard ic, int team, PlayerController player)
+    {
+        bool selectedState = false;
+        if(team == 1)
+        {
+            foreach(PlayerController pc in team1)
+            {
+                if(pc.ControllerId != player.ControllerId)
+                {
+                    if(pc.currentSelectedRow == ic.currentInstructionCard.rowId &&
+                        pc.currentSelectedColumn == ic.currentInstructionCard.columnId)
+                    {
+                        selectedState = true;
+                    }
+                }
+            }
+        }
+        else
+        {
+            foreach (PlayerController pc in team2)
+            {
+                if (pc.ControllerId != player.ControllerId)
+                {
+                    if (pc.currentSelectedRow == ic.currentInstructionCard.rowId &&
+                        pc.currentSelectedColumn == ic.currentInstructionCard.columnId)
+                    {
+                        selectedState = true;
+                    }
+                }
+            }
+        }
+
+        ic.isSelected = selectedState;
+    }
+
+    public void AssignPlayersToInstructionFrame(int team, List<InstructionCard> instructions)
+    {
+        if (team == 1)
+        {
+            foreach (PlayerController pc in team1)
+            {
+                InstructionCardFrame icf = GetValidInstructionFrame(instructions);
+                icf.instructionCard.isSelected = true;
+                pc.currentlySelectedInstructionCard = icf.instructionCard;
+                pc.currentSelectedColumn = icf.columnId;
+                pc.currentSelectedRow = icf.rowId;
+                pc.canvasPlayer.transform.position = icf.transform.position;
+                pc.canvasPlayer.enabled = true;
+                pc.canMoveCanvasPlayer = true;
+                pc.AssignCurrentInstructionCards(instructions);
+            }
+        }
+        else
+        {
+            foreach (PlayerController pc in team2)
+            {
+                InstructionCardFrame icf = GetValidInstructionFrame(instructions);
+                icf.instructionCard.isSelected = true;
+                pc.currentlySelectedInstructionCard = icf.instructionCard;
+                pc.currentSelectedColumn = icf.columnId;
+                pc.currentSelectedRow = icf.rowId;
+                pc.canvasPlayer.transform.position = icf.transform.position;
+                pc.canvasPlayer.enabled = true;
+                pc.canMoveCanvasPlayer = true;
+                pc.AssignCurrentInstructionCards(instructions);
+            }
+        }
+    }
+
+    public InstructionCardFrame GetValidInstructionFrame(List<InstructionCard> instructions)
+    {
+        return instructions[Random.Range(0, instructions.Count)].currentInstructionCard;
     }
 
     public bool CheckAllButtonsUp(XboxController controller)

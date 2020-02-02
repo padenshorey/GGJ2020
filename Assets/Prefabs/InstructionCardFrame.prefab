@@ -147,7 +147,7 @@ LineRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1493530437
-  m_SortingLayer: 1
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Positions:
   - {x: 0, y: 0, z: 0}
@@ -350,7 +350,12 @@ MonoBehaviour:
   disabledObject: {fileID: 1219360261171380532}
   repairRow: {fileID: 6842729266098991269}
   backgroundFill: {fileID: 6842729266098991271}
+  instructionTypeImage: {fileID: 8540486444566554031}
+  soloInstruction: {fileID: 21300000, guid: bc6f2e1ba9162cd4c8e996c6ddc1af19, type: 3}
+  teamInstruction: {fileID: 21300000, guid: 23f7c39543a227548964dffcdff671ee, type: 3}
   instructionCard: {fileID: 0}
+  columnId: 0
+  rowId: 0
 --- !u!95 &942430436763851025
 Animator:
   serializedVersion: 3

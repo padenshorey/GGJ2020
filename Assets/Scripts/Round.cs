@@ -4,7 +4,7 @@ using static Enums;
 
 public class Round 
 {
-    private const int TEAM_INSTRUCTION_CARD_PROBABILITY = 80;
+    private const int TEAM_INSTRUCTION_CARD_PROBABILITY = 10;
 
     private int _teamId;
     private float _roundDuration;
@@ -37,6 +37,7 @@ public class Round
     public void StartRound()
     {
         _roundStarted = true;
+        GameManager.instance.AssignPlayersToInstructionFrame(_teamId, _intructions);
 
         ////Debug.Log("Starting round " + _roundNumber + " for Team " + _teamId);
     }
