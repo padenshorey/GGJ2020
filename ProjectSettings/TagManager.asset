@@ -16,6 +16,8 @@ TagManager:
   - PressStartUI
   - TitleUI
   - PressStartCircle
+  - DroneSprite
+  - DividerLine
   layers:
   - Default
   - TransparentFX

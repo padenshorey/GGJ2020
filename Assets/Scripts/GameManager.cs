@@ -90,7 +90,10 @@ public class GameManager : MonoBehaviour {
         if(startGame)
         {
             GameObject pressReadyUI = GameObject.FindGameObjectWithTag("PressStartUI");
-            pressReadyUI.GetComponent<Animator>().Play("hide-pressStart");
+            if (pressReadyUI == null)
+                Debug.Log("Missing Main Menu UI");
+            else
+                pressReadyUI.GetComponent<Animator>().Play("hide-pressStart");
             bool isAnimPlaying = pressReadyUI.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("hide-pressStart");
 
             if (isAnimPlaying)
