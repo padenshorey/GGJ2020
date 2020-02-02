@@ -41,7 +41,6 @@ public class Game
         {
             case 1:
                 _currentSprintTeam1++;
-                Debug.Log("_currentSprintTeam1 set to " + _currentSprintTeam1);
                 if (_currentSprintTeam1 >= GameManager.instance.SprintData.Length)
                 {
                     EndGame(1);
@@ -52,7 +51,6 @@ public class Game
                 break;
             case 2:
                 _currentSprintTeam2++;
-                Debug.Log("_currentSprintTeam2 set to " + _currentSprintTeam2);
                 if (_currentSprintTeam2 >= GameManager.instance.SprintData.Length)
                 {
                     EndGame(2);

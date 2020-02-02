@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
     public int currentSelectedRow = 0;
     public int currentSelectedColumn = 0;
 
-    public Image canvasPlayer;
+    public GameObject canvasPlayer;
 
     private List<InstructionCard> currentInstructionCards;
     public InstructionCard currentlySelectedInstructionCard;
@@ -55,15 +55,15 @@ public class PlayerController : MonoBehaviour {
         _controllerId = _playerId = id;
         _teamId = teamId;
 
-        GameObject myCanvasPlayer = new GameObject();
+        //GameObject myCanvasPlayer = new GameObject();
 
-        myCanvasPlayer = Instantiate(myCanvasPlayer, GameManager.instance.GameCanvas.transform.GetChild(teamId == 1 ? 0 : 1));
+        GameObject myCanvasPlayerPrefab = Resources.Load("RepairAvatar") as GameObject;
+        GameObject myCanvasPlayer = GameObject.Instantiate(myCanvasPlayerPrefab, GameManager.instance.GameCanvas.transform.GetChild(teamId == 1 ? 0 : 1));
         myCanvasPlayer.name = "CanvasPlayer" + id + "_Team" + teamId;
-        myCanvasPlayer.AddComponent<Image>();
-        canvasPlayer = myCanvasPlayer.GetComponent<Image>();
-        canvasPlayer.sprite = _sprite.sprite;
-        canvasPlayer.preserveAspect = true;
-        canvasPlayer.enabled = false;
+        myCanvasPlayer.GetComponent<RepairAvatar>().SetupSprite(_sprite.sprite, teamId == 1 ? GameManager.instance.team1.Count > 1 : GameManager.instance.team2.Count > 1);
+        myCanvasPlayer.SetActive(false);
+
+        canvasPlayer = myCanvasPlayer;
 
         SetupControls(_controllerId);
     }
@@ -118,9 +118,10 @@ public class PlayerController : MonoBehaviour {
         currentlySelectedInstructionCard = ic;
         currentlySelectedInstructionCard.isSelected = true;
 
-        canvasPlayer.transform.position = ic.currentInstructionCard.transform.position;
+        canvasPlayer.transform.position = new Vector3(ic.currentInstructionCard.transform.position.x - (canvasPlayer.GetComponent<RepairAvatar>().isPlayer2 ? -1.1f : 1.1f), ic.currentInstructionCard.transform.position.y, ic.currentInstructionCard.transform.position.z);
         currentSelectedRow = ic.currentInstructionCard.rowId;
         currentSelectedColumn = ic.currentInstructionCard.columnId;
+        canvasPlayer.GetComponent<RepairAvatar>().animator.SetTrigger("NewCard");
         StartCoroutine(ResetMoveCanvasPlayer());
     }
 
@@ -168,7 +169,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    private void MoveCanvasPlayerUp()
+    private void MoveCanvasPlayerUp(bool checkOtherColumn = false)
     {
         int smallestRowDifference = 99999;
         InstructionCard icToMoveTo = null;
@@ -176,18 +177,29 @@ public class PlayerController : MonoBehaviour {
         {
             if(!ic.IsComplete && ic.currentInstructionCard.rowId < currentSelectedRow && Mathf.Abs(currentSelectedRow - ic.currentInstructionCard.rowId) < smallestRowDifference)
             {
-                icToMoveTo = ic;
-                smallestRowDifference = Mathf.Abs(currentSelectedRow - ic.currentInstructionCard.rowId);
+                if(checkOtherColumn)
+                {
+                    icToMoveTo = ic;
+                    smallestRowDifference = Mathf.Abs(currentSelectedRow - ic.currentInstructionCard.rowId);
+                }
+                else if(ic.currentInstructionCard.columnId == currentSelectedColumn)
+                {
+                    icToMoveTo = ic;
+                    smallestRowDifference = Mathf.Abs(currentSelectedRow - ic.currentInstructionCard.rowId);
+                }
             }
         }
 
         if(icToMoveTo)
         {
             MoveToNewInstructionCard(icToMoveTo);
+        }else
+        {
+            if(!checkOtherColumn) MoveCanvasPlayerUp(true);
         }
     }
 
-    private void MoveCanvasPlayerDown()
+    private void MoveCanvasPlayerDown(bool checkOtherColumn = false)
     {
         int smallestRowDifference = 99999;
         InstructionCard icToMoveTo = null;
@@ -195,14 +207,26 @@ public class PlayerController : MonoBehaviour {
         {
             if (!ic.IsComplete && ic.currentInstructionCard.rowId > currentSelectedRow && Mathf.Abs(currentSelectedRow - ic.currentInstructionCard.rowId) < smallestRowDifference)
             {
-                icToMoveTo = ic;
-                smallestRowDifference = Mathf.Abs(currentSelectedRow - ic.currentInstructionCard.rowId);
+                if (checkOtherColumn)
+                {
+                    icToMoveTo = ic;
+                    smallestRowDifference = Mathf.Abs(currentSelectedRow - ic.currentInstructionCard.rowId);
+                }
+                else if (ic.currentInstructionCard.columnId == currentSelectedColumn)
+                {
+                    icToMoveTo = ic;
+                    smallestRowDifference = Mathf.Abs(currentSelectedRow - ic.currentInstructionCard.rowId);
+                }
             }
         }
 
         if (icToMoveTo)
         {
             MoveToNewInstructionCard(icToMoveTo);
+        }
+        else
+        {
+            if (!checkOtherColumn) MoveCanvasPlayerUp(true);
         }
     }
 

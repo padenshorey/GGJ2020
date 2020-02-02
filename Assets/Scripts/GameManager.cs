@@ -225,9 +225,10 @@ public class GameManager : MonoBehaviour {
                 pc.currentlySelectedInstructionCard = icf.instructionCard;
                 pc.currentSelectedColumn = icf.columnId;
                 pc.currentSelectedRow = icf.rowId;
-                pc.canvasPlayer.transform.position = icf.transform.position;
-                pc.canvasPlayer.enabled = true;
+                pc.canvasPlayer.transform.position = new Vector3(icf.transform.position.x - (pc.canvasPlayer.GetComponent<RepairAvatar>().isPlayer2 ? -1.1f : 1.1f), icf.transform.position.y, icf.transform.position.z);
+                pc.canvasPlayer.SetActive(true);
                 pc.canMoveCanvasPlayer = true;
+                pc.canvasPlayer.GetComponent<RepairAvatar>().animator.SetTrigger("NewCard");
                 pc.AssignCurrentInstructionCards(instructions);
             }
         }
@@ -240,8 +241,8 @@ public class GameManager : MonoBehaviour {
                 pc.currentlySelectedInstructionCard = icf.instructionCard;
                 pc.currentSelectedColumn = icf.columnId;
                 pc.currentSelectedRow = icf.rowId;
-                pc.canvasPlayer.transform.position = icf.transform.position;
-                pc.canvasPlayer.enabled = true;
+                pc.canvasPlayer.transform.position = new Vector3(icf.transform.position.x - (pc.canvasPlayer.GetComponent<RepairAvatar>().isPlayer2 ? -1.1f : 1.1f), icf.transform.position.y, icf.transform.position.z);
+                pc.canvasPlayer.SetActive(true);
                 pc.canMoveCanvasPlayer = true;
                 pc.AssignCurrentInstructionCards(instructions);
             }
