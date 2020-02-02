@@ -16,7 +16,7 @@ public class Round
     public bool RoundComplete { get { return _roundComplete; } }
     private System.Collections.Generic.List<InstructionCard> _intructions = new System.Collections.Generic.List<InstructionCard>();
 
-    public delegate void EventHandler();
+    public delegate void EventHandler(int team);
     public event EventHandler OnRoundComplete;
 
     public Round(int roundNumber, int teamID, float duration, int instructionCardCount)
@@ -26,7 +26,7 @@ public class Round
         _roundDuration = duration;
         _instructionCardCount = instructionCardCount;
 
-        Debug.Log("Round " + _roundNumber + " for Team " + teamID + " with " + _instructionCardCount + " instructions created.");
+        ////Debug.Log("Round " + _roundNumber + " for Team " + teamID + " with " + _instructionCardCount + " instructions created.");
 
         GenerateInstructionCards(_instructionCardCount);
 
@@ -38,12 +38,12 @@ public class Round
     {
         _roundStarted = true;
 
-        Debug.Log("Starting round " + _roundNumber + " for Team " + _teamId);
+        ////Debug.Log("Starting round " + _roundNumber + " for Team " + _teamId);
     }
 
     private void EndRound()
     {
-        Debug.Log("Ending round " + _roundNumber + " for Team " + _teamId);
+        ////Debug.Log("Ending round " + _roundNumber + " for Team " + _teamId);
 
         foreach(InstructionCard ic in _intructions)
         {
@@ -51,12 +51,12 @@ public class Round
         }
 
         _roundComplete = true;
-        OnRoundComplete();
+        OnRoundComplete(_teamId);
     }
 
     private void CheckRoundComplete()
     {
-        Debug.Log("Check Round Complete");
+        ////Debug.Log("Check Round Complete");
 
         foreach (InstructionCard ic in _intructions)
         {

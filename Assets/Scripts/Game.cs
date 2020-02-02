@@ -36,10 +36,12 @@ public class Game
 
     private void OnSprintComplete(int team)
     {
+        //Debug.Log("On Sprint Complete Team " + team.ToString());
         switch (team)
         {
             case 1:
                 _currentSprintTeam1++;
+                Debug.Log("_currentSprintTeam1 set to " + _currentSprintTeam1);
                 if (_currentSprintTeam1 >= GameManager.instance.SprintData.Length)
                 {
                     EndGame(1);
@@ -50,13 +52,14 @@ public class Game
                 break;
             case 2:
                 _currentSprintTeam2++;
+                Debug.Log("_currentSprintTeam2 set to " + _currentSprintTeam2);
                 if (_currentSprintTeam2 >= GameManager.instance.SprintData.Length)
                 {
                     EndGame(2);
                     return;
                 }
                 GameManager.instance.CutsceneManager.SpawnCutscene(2, Enums.Cutscene.Broken);
-                _currentRoundTeam2 = StartRound(_team2CompletedRounds.Count + 1, 2);
+                _currentRoundTeam2 = StartRound(_team2CompletedRounds.Count+1, 2);
                 break;
             default:
                 break;
@@ -71,15 +74,14 @@ public class Game
         GameManager.instance.EndGame();
     }
 
-    public void CheckRoundsComplete()
+    public void CheckRoundsComplete(int team)
     {
-        if (_currentRoundTeam1.RoundComplete)
+        if (team == 1 )
         {
             _team1CompletedRounds.Add(_currentRoundTeam1);
             GameManager.instance.CutsceneManager.SpawnCutscene(1, Enums.Cutscene.Repair);
             StartNextSprintSequence(1);
-        }
-        else if (_currentRoundTeam2.RoundComplete)
+        }else
         {
             GameManager.instance.CutsceneManager.SpawnCutscene(2, Enums.Cutscene.Repair);
             _team2CompletedRounds.Add(_currentRoundTeam2);

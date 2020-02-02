@@ -109,7 +109,7 @@ public class SprintSequence : MonoBehaviour
 
     private void EndSprint()
     {
-        Debug.Log("Ending Sprint for Team " + _teamId);
+        //Debug.Log("Ending Sprint for Team " + _teamId);
         OnSprintComplete(_teamId);
         Destroy(this.gameObject);
     }

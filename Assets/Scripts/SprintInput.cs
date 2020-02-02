@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SprintInput : MonoBehaviour
+public class SprintInput
 {
     private string _buttonToMash;
     public string ButtonToMash { get { return _buttonToMash; } }

@@ -44,8 +44,8 @@ public class Enums
 
     public static Dictionary<string, float[]> StickRepairDirectionValues = new Dictionary<string, float[]>()
     {
-        {"Up", new float[]{0, -1} },
-        {"Down", new float[]{0, 1} },
+        {"Up", new float[]{0, 1} },
+        {"Down", new float[]{0, -1} },
         {"Left", new float[]{-1, 0} },
         {"Right", new float[]{1, 0} }
     };

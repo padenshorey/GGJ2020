@@ -2,11 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Repair : MonoBehaviour
+public class Repair 
 {
     private const float REPAIR_BUTTON_PRESS_WEIGHT = 10f;
-    private const float REPAIR_BUTTON_COMBO_WEIGHT = 2f;
-    private const float REPAIR_STICK_DIRECTION_WEIGHT = 2f;
+    private const float REPAIR_BUTTON_COMBO_WEIGHT = 0f;
+    private const float REPAIR_STICK_DIRECTION_WEIGHT = 10f;
 
     private bool _isComplete = false;
     public bool IsComplete { get { return _isComplete; } }
@@ -30,13 +30,13 @@ public class Repair : MonoBehaviour
         {
             if (keyValuePair.Value == Enums.RepairType.StickDirection)
             {
-                if (Input.GetAxisRaw(controller1.joyRightHori) == Enums.StickRepairDirectionValues[keyValuePair.Key][0] &&
-                    Input.GetAxisRaw(controller1.joyRightVert) == Enums.StickRepairDirectionValues[keyValuePair.Key][1])
+                if (Input.GetAxisRaw(controller1.dpadHori) == Enums.StickRepairDirectionValues[keyValuePair.Key][0] &&
+                    Input.GetAxisRaw(controller1.dpadVert) == Enums.StickRepairDirectionValues[keyValuePair.Key][1])
                 {
                     if (controller2 != null)
                     {
-                        if (Input.GetAxisRaw(controller2.joyRightHori) != Enums.StickRepairDirectionValues[keyValuePair.Key][0] ||
-                            Input.GetAxisRaw(controller2.joyRightVert) != Enums.StickRepairDirectionValues[keyValuePair.Key][1])
+                        if (Input.GetAxisRaw(controller2.dpadHori) != Enums.StickRepairDirectionValues[keyValuePair.Key][0] ||
+                            Input.GetAxisRaw(controller2.dpadVert) != Enums.StickRepairDirectionValues[keyValuePair.Key][1])
                         {
                             _isComplete = false;
                         }
@@ -103,7 +103,7 @@ public class Repair : MonoBehaviour
 
         foreach(KeyValuePair<string, Enums.RepairType> keyValuePair in repairRequirements)
         {
-            Debug.Log("Repair Created: " + keyValuePair.Key + ", " + keyValuePair.Value);
+            //Debug.Log("Repair Created: " + keyValuePair.Key + ", " + keyValuePair.Value);
         }
     }
 }

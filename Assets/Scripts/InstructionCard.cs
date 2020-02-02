@@ -35,7 +35,7 @@ public class InstructionCard : MonoBehaviour
 
     private void FinishInstructionCard()
     {
-        Debug.Log("Finished Instruction Card");
+        //Debug.Log("Finished Instruction Card");
         _isComplete = true;
         OnCardComplete();
     }
@@ -63,7 +63,7 @@ public class InstructionCard : MonoBehaviour
         // if the repair is complete, continue to the next repair or finish the instruction card
         if(repairComplete)
         {
-            Debug.Log("Repair Complete: " + _repairs[_currentRepairStep].repairRequirements);
+            //Debug.Log("Repair Complete: " + _repairs[_currentRepairStep].repairRequirements);
             currentInstructionCard.IncreaseStep();
             if (AllRepairsComplete())
             {
@@ -83,7 +83,7 @@ public class InstructionCard : MonoBehaviour
 
     public void Setup(Enums.InstructionType repairType, int repairCount, int teamId)
     {
-        Debug.Log(repairType.ToString() + " instruction card with " + repairCount + " repairs created.");
+        //Debug.Log(repairType.ToString() + " instruction card with " + repairCount + " repairs created.");
 
         _teamId = teamId;
         teamControllers = GameManager.instance.GetTeamControllers(teamId);
