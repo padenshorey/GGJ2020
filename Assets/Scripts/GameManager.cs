@@ -97,8 +97,9 @@ public class GameManager : MonoBehaviour {
              {
                 Debug.Log("Anim done!");
                 GameObject countdownObject = GameObject.FindGameObjectWithTag("Countdown");
-                countdownObject.GetComponent<SpriteRenderer>().enabled = true;
                 countdownObject.GetComponent<Animator>().enabled = true;
+                countdownObject.GetComponent<SpriteRenderer>().enabled = true;
+            
 
             }
            
