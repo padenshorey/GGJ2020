@@ -51,12 +51,14 @@ public class Round
 
         }
 
+
         ////Debug.Log("Starting round " + _roundNumber + " for Team " + _teamId);
     }
 
     private void EndRound()
     {
         ////Debug.Log("Ending round " + _roundNumber + " for Team " + _teamId);
+
 
         foreach(InstructionCard ic in _intructions)
         {
@@ -65,6 +67,8 @@ public class Round
 
         _roundComplete = true;
         OnRoundComplete(_teamId);
+
+        //GameManager.instance.playersSpawner.SetActive(false);
     }
 
     private void CheckRoundComplete()

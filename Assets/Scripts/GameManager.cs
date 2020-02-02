@@ -39,10 +39,23 @@ public class GameManager : MonoBehaviour {
     public InstructionCardFrame[] instructionCardFramesTeam1;
     public InstructionCardFrame[] instructionCardFramesTeam2;
 
+
     public Drone drone;
 
     public int team1CurrentRound = 0;
     public int team2CurrentRound = 0;
+
+    //Sprites
+    public GameObject craneLeft;
+    public GameObject craneRight;
+    public GameObject robot1;
+    public GameObject robot2;
+    public GameObject playersSpawner01;
+    public GameObject playersSpawner02;
+    public GameObject playersSpawner03;
+    public GameObject playersSpawner04;
+
+
 
     void Awake () {
         if (instance == null)
@@ -54,6 +67,15 @@ public class GameManager : MonoBehaviour {
 	void Start () {
         audioManager = FindObjectOfType<AudioManager>();
         cutsceneManager = FindObjectOfType<CutsceneManager>();
+
+        craneLeft = GameObject.Find("CraneL");
+        craneRight = GameObject.Find("CraneR");
+        robot1 = GameObject.Find("Robot1");
+        robot2 = GameObject.Find("Robot2");
+        playersSpawner01 = GameObject.Find("mechanic-sprite-1-inactive");
+        playersSpawner02 = GameObject.Find("mechanic-sprite-2-inactive");
+        playersSpawner03 = GameObject.Find("mechanic-sprite-3-inactive");
+        playersSpawner04 = GameObject.Find("mechanic-sprite-4-inactive");
     }
 	
 	void Update () {
@@ -66,6 +88,14 @@ public class GameManager : MonoBehaviour {
         //Debug.Log("STARTING GAME");
         drone.GetComponent<Animator>().SetTrigger("Start");
         _currentGame = new Game(_roundData.Length);
+
+
+        craneLeft.SetActive(false);
+        craneRight.SetActive(false);
+        playersSpawner01.SetActive(false);
+        playersSpawner02.SetActive(false);
+        playersSpawner03.SetActive(false);
+        playersSpawner04.SetActive(false);
     }
 
     public void EndGame()

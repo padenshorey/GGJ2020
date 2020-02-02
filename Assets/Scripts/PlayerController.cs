@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
+    public static GameManager instance = null;
     private XboxController _controller;
     public XboxController Controller { get { return _controller; } }
     private int _controllerId;
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviour {
     public int currentSelectedColumn = 0;
 
     public GameObject canvasPlayer;
+
+    public Game game;
 
     private List<InstructionCard> currentInstructionCards;
     public InstructionCard currentlySelectedInstructionCard;
@@ -60,11 +63,18 @@ public class PlayerController : MonoBehaviour {
         GameObject myCanvasPlayerPrefab = Resources.Load("RepairAvatar") as GameObject;
         GameObject myCanvasPlayer = GameObject.Instantiate(myCanvasPlayerPrefab, GameManager.instance.GameCanvas.transform.GetChild(teamId == 1 ? 0 : 1));
         myCanvasPlayer.name = "CanvasPlayer" + id + "_Team" + teamId;
+
         myCanvasPlayer.GetComponent<RepairAvatar>().SetupSprite(_sprite.sprite, teamId == 1 ? GameManager.instance.team1.Count > 1 : GameManager.instance.team2.Count > 1);
         myCanvasPlayer.SetActive(false);
 
         canvasPlayer = myCanvasPlayer;
 
+        // myCanvasPlayer.AddComponent<Image>();
+        // canvasPlayer = myCanvasPlayer.GetComponent<Image>();
+        // canvasPlayer.sprite = _sprite.sprite;
+        // canvasPlayer.preserveAspect = true;
+
+        // canvasPlayer.enabled = false;
         SetupControls(_controllerId);
     }
 

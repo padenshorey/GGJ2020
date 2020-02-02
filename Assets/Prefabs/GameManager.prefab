@@ -99,3 +99,11 @@ MonoBehaviour:
   drone: {fileID: 0}
   team1CurrentRound: 0
   team2CurrentRound: 0
+  craneLeft: {fileID: 0}
+  craneRight: {fileID: 0}
+  robot1: {fileID: 0}
+  robot2: {fileID: 0}
+  playersSpawner01: {fileID: 0}
+  playersSpawner02: {fileID: 0}
+  playersSpawner03: {fileID: 0}
+  playersSpawner04: {fileID: 0}

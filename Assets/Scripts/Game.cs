@@ -11,6 +11,8 @@ public class Game
     private int _currentSprintTeam1 = 0;
     private int _currentSprintTeam2 = 0;
 
+    public PlayerController player;
+
     private List<Round> _team1CompletedRounds = new List<Round>();
     private List<Round> _team2CompletedRounds = new List<Round>();
     public Game(int roundCount)
@@ -27,6 +29,18 @@ public class Game
 
     public void StartNextSprintSequence(int team)
     {
+        if (team == 1)
+        {
+            GameManager.instance.craneLeft.SetActive(false);
+            GameManager.instance.playersSpawner01.SetActive(false);
+            GameManager.instance.playersSpawner02.SetActive(false);
+        } else 
+        {
+            GameManager.instance.craneRight.SetActive(false);
+            GameManager.instance.playersSpawner03.SetActive(false);
+            GameManager.instance.playersSpawner04.SetActive(false);
+        }
+
         GameObject sprintPrefab = Resources.Load("SprintSequence") as GameObject;
         GameObject sprint = GameObject.Instantiate(sprintPrefab, GameManager.instance.GameCanvas.transform.Find("Team" + team.ToString()));
         SprintSequence currentSprintSequence = sprint.GetComponent<SprintSequence>();
@@ -41,6 +55,13 @@ public class Game
         {
             case 1:
                 _currentSprintTeam1++;
+
+                
+                GameManager.instance.craneLeft.SetActive(true);
+                GameManager.instance.playersSpawner01.SetActive(true);
+                GameManager.instance.playersSpawner02.SetActive(true);
+
+                Debug.Log("_currentSprintTeam1 set to " + _currentSprintTeam1);
                 if (_currentSprintTeam1 >= GameManager.instance.SprintData.Length)
                 {
                     EndGame(1);
@@ -51,6 +72,14 @@ public class Game
                 break;
             case 2:
                 _currentSprintTeam2++;
+
+
+                GameManager.instance.craneRight.SetActive(true);
+                GameManager.instance.playersSpawner03.SetActive(true);
+                GameManager.instance.playersSpawner04.SetActive(true);
+
+                Debug.Log("_currentSprintTeam2 set to " + _currentSprintTeam2);
+
                 if (_currentSprintTeam2 >= GameManager.instance.SprintData.Length)
                 {
                     EndGame(2);
@@ -79,13 +108,29 @@ public class Game
             _team1CompletedRounds.Add(_currentRoundTeam1);
             HideRepairAvatarsForTeam(1);
             GameManager.instance.CutsceneManager.SpawnCutscene(1, Enums.Cutscene.Repair);
+            GameManager.instance.craneLeft.SetActive(false);
+            GameManager.instance.playersSpawner01.SetActive(false);
+            GameManager.instance.playersSpawner02.SetActive(false);
             StartNextSprintSequence(1);
+
+            GameObject myRobot = GameManager.instance.robot1;
+            myRobot.GetComponent<SpriteRenderer>().sprite = myRobot.GetComponent<RobotStates>().robotGood; 
+            
         }else
         {
             GameManager.instance.CutsceneManager.SpawnCutscene(2, Enums.Cutscene.Repair);
+
             HideRepairAvatarsForTeam(2);
+
+            GameManager.instance.craneRight.SetActive(false);
+            GameManager.instance.playersSpawner03.SetActive(false);
+            GameManager.instance.playersSpawner04.SetActive(false);
+
             _team2CompletedRounds.Add(_currentRoundTeam2);
             StartNextSprintSequence(2);
+
+            GameObject myRobot = GameManager.instance.robot2;
+            myRobot.GetComponent<SpriteRenderer>().sprite = myRobot.GetComponent<RobotStates>().robotGood; 
         }
     }
 
@@ -109,7 +154,31 @@ public class Game
 
     public Round StartRound(int roundNumber, int teamId)
     {
+        
+        if (teamId == 1) {
+            GameManager.instance.craneLeft.SetActive(true);
+            GameManager.instance.playersSpawner01.SetActive(true);
+            GameManager.instance.playersSpawner02.SetActive(true);
+        } else {
+            GameManager.instance.craneRight.SetActive(true);
+            GameManager.instance.playersSpawner03.SetActive(true);
+            GameManager.instance.playersSpawner04.SetActive(true);
+        }
+
         Round currentRound = new Round(roundNumber, teamId, GameManager.instance.RoundData[roundNumber - 1].RoundDuration, GameManager.instance.RoundData[roundNumber - 1].InstructionCardCount);
+
+        Debug.Log(currentRound.RoundNumber);
+
+        if (currentRound.RoundNumber >= 1) {
+            if (teamId == 1) {
+            GameObject myRobot = GameManager.instance.robot1;
+            myRobot.GetComponent<SpriteRenderer>().sprite = myRobot.GetComponent<RobotStates>().robotBad;
+            } else {
+                GameObject myRobot = GameManager.instance.robot2;
+
+                 myRobot.GetComponent<SpriteRenderer>().sprite = myRobot.GetComponent<RobotStates>().robotBad;
+            }
+        }
 
         currentRound.OnRoundComplete += CheckRoundsComplete;
         
