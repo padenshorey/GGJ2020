@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6351c2ec4458c05489356a541ab4ecea, type: 3}
   m_Name: SprintData2
   m_EditorClassIdentifier: 
-  numberOfPressesRequired: 20
+  numberOfPressesRequired: 10
   numberOfButtons: 3

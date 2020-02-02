@@ -107,3 +107,4 @@ MonoBehaviour:
   playersSpawner02: {fileID: 0}
   playersSpawner03: {fileID: 0}
   playersSpawner04: {fileID: 0}
+  spawnerParent: {fileID: 0}

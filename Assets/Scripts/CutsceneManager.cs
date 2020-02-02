@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CutsceneManager : MonoBehaviour
 {
+    public GameObject introScene;
+
     public GameObject blueRepaired;
     public GameObject redRepared;
 
@@ -16,6 +18,10 @@ public class CutsceneManager : MonoBehaviour
 
         switch (cutscene)
         {
+            case Enums.Cutscene.Intro:
+                currentCutscene = Instantiate(introScene);
+                Destroy(currentCutscene, 3f);
+                break;
             case Enums.Cutscene.Repair:
                 if(team == 1)
                 {
@@ -26,6 +32,7 @@ public class CutsceneManager : MonoBehaviour
                     currentCutscene = Instantiate(redRepared);
                 }
                 Destroy(currentCutscene, 2.5f);
+               
                 break;
             case Enums.Cutscene.Broken:
                 if (team == 1)
@@ -37,9 +44,24 @@ public class CutsceneManager : MonoBehaviour
                     currentCutscene = Instantiate(redToTimeFix);
                 }
                 Destroy(currentCutscene, 2.5f);
+                StartCoroutine(IndicatePlayers());
                 break;
             default:
                 break;
+        }
+    }
+
+    IEnumerator IndicatePlayers()
+    {
+        yield return new WaitForSeconds(2.75f);
+        foreach(PlayerController pc in GameManager.instance.team1)
+        {
+            pc.canvasPlayer.GetComponent<RepairAvatar>().animator.SetTrigger("ImHere");
+        }
+
+        foreach (PlayerController pc in GameManager.instance.team2)
+        {
+            pc.canvasPlayer.GetComponent<RepairAvatar>().animator.SetTrigger("ImHere");
         }
     }
 }

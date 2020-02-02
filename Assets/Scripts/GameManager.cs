@@ -13,7 +13,7 @@ public class GameManager : MonoBehaviour {
     private CutsceneManager cutsceneManager;
     public CutsceneManager CutsceneManager { get { return cutsceneManager; } }
 
-    private const float TIME_UNTIL_GAME_RESET = 3;
+    private const float TIME_UNTIL_GAME_RESET = 10f;
     private const int MAX_PLAYERS = 4;
     private bool _gameInProgress = false;
     public bool GameInProgress { get { return _gameInProgress; } }
@@ -41,6 +41,10 @@ public class GameManager : MonoBehaviour {
 
 
     public Drone drone;
+    public WinScreen winScreen;
+
+    public SpeedLineManager blueSpeedLineManager;
+    public SpeedLineManager redSpeedLineManager;
 
     public int team1CurrentRound = 0;
     public int team2CurrentRound = 0;
@@ -54,8 +58,7 @@ public class GameManager : MonoBehaviour {
     public GameObject playersSpawner02;
     public GameObject playersSpawner03;
     public GameObject playersSpawner04;
-
-
+    public GameObject spawnerParent;
 
     void Awake () {
         if (instance == null)
@@ -96,10 +99,12 @@ public class GameManager : MonoBehaviour {
         playersSpawner02.SetActive(false);
         playersSpawner03.SetActive(false);
         playersSpawner04.SetActive(false);
+
     }
 
-    public void EndGame()
+    public void EndGame(int team)
     {
+        winScreen.TriggerWinBanner(team);
         StartCoroutine(ResetGame());
     }
 
@@ -140,7 +145,7 @@ public class GameManager : MonoBehaviour {
                 GameObject countdownObject = GameObject.FindGameObjectWithTag("Countdown");
                 countdownObject.GetComponent<Animator>().enabled = true;
                 countdownObject.GetComponent<SpriteRenderer>().enabled = true;
-            
+                cutsceneManager.SpawnCutscene(0, Enums.Cutscene.Intro);
 
             }
            
