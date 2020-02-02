@@ -59,7 +59,7 @@ public class CutsceneManager : MonoBehaviour
                     currentCutscene = Instantiate(redToTimeFix);
                 }
                 Destroy(currentCutscene, 2.5f);
-                StartCoroutine(IndicatePlayers());
+                //StartCoroutine(IndicatePlayers());
                 break;
             default:
                 break;

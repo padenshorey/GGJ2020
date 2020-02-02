@@ -19,6 +19,8 @@ public class AudioManager : MonoBehaviour {
     AudioSource sfx;
     AudioSource soundtrack;
 
+    public AudioSource loudAudioSource;
+
 	void Start () {
         sources = GetComponents<AudioSource>();
         sfx = sources[0];
@@ -44,10 +46,10 @@ public class AudioManager : MonoBehaviour {
                 sfx.PlayOneShot(dies[Random.Range(0, dies.Length)]);
                 break;
             case "goodScreams":
-                sfx.PlayOneShot(goodScreams[Random.Range(0, goodScreams.Length)]);
+                loudAudioSource.PlayOneShot(goodScreams[Random.Range(0, goodScreams.Length)]);
                 break;
             case "badScreams":
-                sfx.PlayOneShot(badScreams[Random.Range(0, badScreams.Length)]);
+                loudAudioSource.PlayOneShot(badScreams[Random.Range(0, badScreams.Length)]);
                 break;
             case "wooshes":
                 sfx.PlayOneShot(wooshes[Random.Range(0, wooshes.Length)]);

@@ -24,6 +24,15 @@ public class Game
 
     public void StartGame()
     {
+
+        GameObject[] checkmarks = GameObject.FindGameObjectsWithTag("ReadyCheckmark");
+        
+        for(int i = 0; i < checkmarks.Length; i ++)
+        {
+            Debug.Log("ReadyCheckmark" + i);
+            checkmarks[i].SetActive(false);
+        }
+
         StartNextSprintSequence(1);
         StartNextSprintSequence(2);
     }
@@ -99,6 +108,16 @@ public class Game
         Debug.Log("TEAM " + winningTeamId + " WINS!");
 
         GameManager.instance.EndGame(winningTeamId);
+
+        foreach(PlayerController pc in GameManager.instance.team1)
+        {
+            pc.enabled = false;
+        }
+
+        foreach(PlayerController pc in GameManager.instance.team2)
+        {
+            pc.enabled = false;
+        }
     }
 
     public void CheckRoundsComplete(int team)
