@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: 1825557864215770592, guid: 2ba61e30af94eb4439a519b82f7aed80,
         type: 3}
       propertyPath: m_Name
-      value: Cutscene_Repaired_Red
+      value: Cutscene_Repaired_Red Variant
       objectReference: {fileID: 0}
     - target: {fileID: 1825557864215770595, guid: 2ba61e30af94eb4439a519b82f7aed80,
         type: 3}
@@ -110,7 +110,7 @@ PrefabInstance:
     - target: {fileID: 1825557864426600214, guid: 2ba61e30af94eb4439a519b82f7aed80,
         type: 3}
       propertyPath: m_SortingOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2ba61e30af94eb4439a519b82f7aed80, type: 3}
