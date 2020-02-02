@@ -9,11 +9,18 @@ public class InstructionCardFrame : MonoBehaviour
     public GameObject disabledObject;
     public Transform repairRow;
     public Image backgroundFill;
+    public Image instructionTypeImage;
+
+    public Sprite soloInstruction;
+    public Sprite teamInstruction;
 
     private Animator animator;
 
     private int _successfulRepairs = 0;
     public InstructionCard instructionCard;
+
+    public int columnId;
+    public int rowId;
 
     private bool _inUse = false;
     public bool InUse { get { return _inUse; } }
@@ -30,6 +37,15 @@ public class InstructionCardFrame : MonoBehaviour
         disabledObject.SetActive(false);
         instructionCard = card;
         animator.SetTrigger("Show");
+
+        if(card.InstructionType == Enums.InstructionType.Solo)
+        {
+            instructionTypeImage.sprite = soloInstruction;
+        }
+        else
+        {
+            instructionTypeImage.sprite = teamInstruction;
+        }
 
         PopulateCard(card);
     }

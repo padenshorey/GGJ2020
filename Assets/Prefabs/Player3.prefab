@@ -78,7 +78,7 @@ SpriteRenderer:
   m_Size: {x: 0.76, y: 0.94}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!95 &1907407939
@@ -226,7 +226,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5053882267223142399}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -8.195388, y: 1.6510855, z: 90}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 3264092890607812330}
@@ -246,3 +246,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d80eb588093bb3344ae2745c02af1f89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentSelectedRow: 0
+  currentSelectedColumn: 0
+  canvasPlayer: {fileID: 0}

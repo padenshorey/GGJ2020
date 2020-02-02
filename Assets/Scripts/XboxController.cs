@@ -1,4 +1,6 @@
-﻿public class XboxController
+﻿using UnityEngine;
+
+public class XboxController
 {
     public int controllerId;
 
@@ -37,6 +39,7 @@
     public XboxController(int cId)
     {
         controllerId = cId;
+        Debug.Log("Controller ID being set to: " + controllerId);
         string id = controllerId.ToString();
 #if UNITY_EDITOR_OSX || UNITY_STANDALONE_OSX
         id = "MAC_" + id;
