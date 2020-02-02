@@ -45,6 +45,7 @@ public class Game
                     EndGame(1);
                     return;
                 }
+                GameManager.instance.CutsceneManager.SpawnCutscene(1, Enums.Cutscene.Broken);
                 _currentRoundTeam1 = StartRound(_team1CompletedRounds.Count+1, 1);
                 break;
             case 2:
@@ -54,6 +55,7 @@ public class Game
                     EndGame(2);
                     return;
                 }
+                GameManager.instance.CutsceneManager.SpawnCutscene(2, Enums.Cutscene.Broken);
                 _currentRoundTeam2 = StartRound(_team2CompletedRounds.Count + 1, 2);
                 break;
             default:
