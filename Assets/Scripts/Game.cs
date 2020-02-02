@@ -74,10 +74,12 @@ public class Game
         if (_currentRoundTeam1.RoundComplete)
         {
             _team1CompletedRounds.Add(_currentRoundTeam1);
+            GameManager.instance.CutsceneManager.SpawnCutscene(1, Enums.Cutscene.Repair);
             StartNextSprintSequence(1);
         }
         else if (_currentRoundTeam2.RoundComplete)
         {
+            GameManager.instance.CutsceneManager.SpawnCutscene(2, Enums.Cutscene.Repair);
             _team2CompletedRounds.Add(_currentRoundTeam2);
             StartNextSprintSequence(2);
         }
