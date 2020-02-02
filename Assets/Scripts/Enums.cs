@@ -16,6 +16,14 @@ public class Enums
         StickDirection = 2
     }
 
+    public enum Cutscene
+    {
+        Repair = 0,
+        Broken = 1,
+        Intro = 2,
+        EndGame = 3
+    }
+
     public static string[] RepairButtons =
     {
         "A_",

@@ -10,11 +10,18 @@ public class InstructionCardFrame : MonoBehaviour
     public Transform repairRow;
     public Image backgroundFill;
 
+    private Animator animator;
+
     private int _successfulRepairs = 0;
     public InstructionCard instructionCard;
 
     private bool _inUse = false;
     public bool InUse { get { return _inUse; } }
+
+    void Awake()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     public void ActivateCard(InstructionCard card)
     { 
@@ -22,6 +29,7 @@ public class InstructionCardFrame : MonoBehaviour
         activeObject.SetActive(true);
         disabledObject.SetActive(false);
         instructionCard = card;
+        animator.SetTrigger("Show");
 
         PopulateCard(card);
     }
@@ -54,7 +62,7 @@ public class InstructionCardFrame : MonoBehaviour
 
     public void SetAsComplete()
     {
-
+        animator.SetTrigger("Hide");
     }
 
     public void DisableCard()
@@ -66,6 +74,7 @@ public class InstructionCardFrame : MonoBehaviour
             GameObject.Destroy(child.gameObject);
         }
 
+        
         _inUse = false;
         activeObject.SetActive(false);
         disabledObject.SetActive(true);

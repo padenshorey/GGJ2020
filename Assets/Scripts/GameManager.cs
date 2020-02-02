@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
     public PlayerController playerPrefab;
     private AudioManager audioManager;
+    public AudioManager AudioManager { get { return audioManager; } }
+    private CutsceneManager cutsceneManager;
+    public CutsceneManager CutsceneManager { get { return cutsceneManager; } }
 
     private const float TIME_UNTIL_GAME_RESET = 3;
     private const int MAX_PLAYERS = 4;
@@ -42,6 +45,7 @@ public class GameManager : MonoBehaviour {
 
 	void Start () {
         audioManager = FindObjectOfType<AudioManager>();
+        cutsceneManager = FindObjectOfType<CutsceneManager>();
     }
 	
 	void Update () {
