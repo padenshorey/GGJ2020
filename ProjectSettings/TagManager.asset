@@ -6,6 +6,11 @@ TagManager:
   tags:
   - active-sprite
   - inactive-sprite
+  - Player3Location
+  - Player4Location
+  - Player2Location
+  - Player1Location
+  - Countdown
   layers:
   - Default
   - TransparentFX

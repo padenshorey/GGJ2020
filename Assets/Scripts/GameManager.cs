@@ -54,7 +54,7 @@ public class GameManager : MonoBehaviour {
     }
 
     // GAME LOOP CODE
-    void StartGame()
+    public void StartGame()
     {
         Debug.Log("STARTING GAME");
         _currentGame = new Game(_roundData.Length);
@@ -87,7 +87,15 @@ public class GameManager : MonoBehaviour {
             if (!pc.ReadyToPlay) startGame = false;
         }
 
-        if (startGame) StartGame();
+        if(startGame)
+        {
+            GameObject countdownObject = GameObject.FindGameObjectWithTag("Countdown");
+            countdownObject.GetComponent<SpriteRenderer>().enabled = true;
+            countdownObject.GetComponent<Animator>().enabled = true;
+        }
+
+
+        //if (startGame) StartGame();
     }
 
     //PLAYER CODE
