@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour {
 
     public void CheckGameStart()
     {
-        //if (PlayerCount < 2) return;
+        if (PlayerCount < 2) return;
 
         bool startGame = true;
         
@@ -137,12 +137,15 @@ public class GameManager : MonoBehaviour {
                 pressReadyUI.GetComponent<Animator>().Play("hide-pressStart");
             bool isAnimPlaying = pressReadyUI.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("hide-pressStart");
 
+
             if (isAnimPlaying)
              {
                 Debug.Log("Anim done!");
                 GameObject countdownObject = GameObject.FindGameObjectWithTag("Countdown");
                 countdownObject.GetComponent<Animator>().enabled = true;
                 countdownObject.GetComponent<SpriteRenderer>().enabled = true;
+
+                
             
 
             }
@@ -162,6 +165,7 @@ public class GameManager : MonoBehaviour {
             {
                 audioManager.PlaySound("beeps");
                 SpawnPlayer(i);
+                
             }
         }
     }

@@ -32,6 +32,7 @@ public class PlayerController : MonoBehaviour {
     private List<InstructionCard> currentInstructionCards;
     public InstructionCard currentlySelectedInstructionCard;
 
+
     void Awake()
     {
         _sprite = transform.GetComponentInChildren<SpriteRenderer>();
@@ -57,6 +58,7 @@ public class PlayerController : MonoBehaviour {
         transform.gameObject.name = "Player" + id;
         _controllerId = _playerId = id;
         _teamId = teamId;
+       
 
         //GameObject myCanvasPlayer = new GameObject();
 
@@ -81,10 +83,29 @@ public class PlayerController : MonoBehaviour {
     private void SetupControls(int id)
     {
         _controller = new XboxController(id);
+
     }
 
     private void ControllerInput()
     {
+
+      
+        //if game isn't started...
+        if(!GameManager.instance.GameInProgress)
+        {
+            if(Input.GetButtonDown(_controller.b) || (Input.GetButtonDown(_controller.a) && joinedGame))
+            {
+                this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y + 0.5f, this.gameObject.transform.position.z);
+            }
+            else if (Input.GetButtonUp(_controller.b) || (Input.GetButtonUp(_controller.a) && joinedGame))
+            {
+                this.gameObject.transform.position = new Vector3(this.gameObject.transform.position.x, this.gameObject.transform.position.y - 0.5f, this.gameObject.transform.position.z);
+            }
+
+        }
+
+
+
         //ready up
         if (Input.GetButtonDown(_controller.start) &&
             !_readyToPlay &&
@@ -240,6 +261,7 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public bool joinedGame = false;
     private void ReadyUp()
     {
         _readyToPlay = true;
@@ -261,8 +283,9 @@ public class PlayerController : MonoBehaviour {
                 mysprite.transform.gameObject.GetComponentInChildren<SpriteRenderer>().enabled = true;
             }
         }
-
+        joinedGame = true;
         GameManager.instance.CheckGameStart();
+
 
 
     }

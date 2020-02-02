@@ -13,6 +13,13 @@ public class Countdown : MonoBehaviour
         this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
         GameObject.FindGameObjectWithTag("DroneSprite").GetComponent<SpriteRenderer>().enabled = true;
         GameObject.FindGameObjectWithTag("DividerLine").GetComponent<SpriteRenderer>().enabled = true;
+
+        GameObject[] allCheckmarks = GameObject.FindGameObjectsWithTag("ReadyCheckmark");
+        for (int i = 0; i < allCheckmarks.Length; i++)
+        {
+            allCheckmarks[i].GetComponent<SpriteRenderer>().enabled = false;
+
+        }
     }
 
     void Start() {
