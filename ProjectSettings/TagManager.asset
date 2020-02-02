@@ -18,6 +18,7 @@ TagManager:
   - PressStartCircle
   - DroneSprite
   - DividerLine
+  - ReadyCheckmark
   layers:
   - Default
   - TransparentFX
