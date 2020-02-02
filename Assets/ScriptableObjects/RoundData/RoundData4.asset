@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: RoundData4
   m_EditorClassIdentifier: 
   RoundDuration: 45
-  InstructionCardCount: 3
+  InstructionCardCount: 9
   MinRepairCount: 2
   MaxRepairCount: 4
