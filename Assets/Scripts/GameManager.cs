@@ -7,6 +7,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour {
     public static GameManager instance = null;
     public PlayerController playerPrefab;
+    public PlayerController[] players;
     private AudioManager audioManager;
 
     private const float TIME_UNTIL_GAME_RESET = 3;
@@ -68,7 +69,7 @@ public class GameManager : MonoBehaviour {
 
     public void CheckGameStart()
     {
-        //if (PlayerCount < 2) return; //PUT THIS BACK IN
+        if (PlayerCount < 2) return;
 
         bool startGame = true;
         
@@ -112,8 +113,19 @@ public class GameManager : MonoBehaviour {
     }
 
     private void SpawnPlayer(int controllerId) {
-        Debug.Log("Spawn Player " + controllerId);
-        PlayerController player = Instantiate(playerPrefab, transform);
+        if (GameManager.instance.GameInProgress)
+        {
+            Debug.Log("You cannot join while the game in in progress");
+            return;
+        }
+
+
+        Debug.Log("Spawn Player with controller " + controllerId);
+
+        GameObject playerLocation = GameObject.FindGameObjectWithTag("Player" + (PlayerCount + 1) + "Location");
+        PlayerController player = Instantiate(players[PlayerCount], playerLocation.transform);
+
+        playerLocation.GetComponent<SpriteRenderer>().enabled = false;
         player.SetupPlayer(controllerId, AssignTeam(player));
     }
 
