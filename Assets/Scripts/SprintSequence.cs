@@ -61,8 +61,6 @@ public class SprintSequence : MonoBehaviour
         {
             if(Input.GetButtonDown(_sprintInputSequence[_currentSprintSequenceIndex].ButtonToMash + controller.controllerId))
             {
-                Debug.Log("YOO");
-
                 audioManager.PlaySound("steps");
 
                 _sprintInputSequence[_currentSprintSequenceIndex].ButtonPressCount++;

@@ -6,6 +6,11 @@ TagManager:
   tags:
   - active-sprite
   - inactive-sprite
+  - Player3Location
+  - Player4Location
+  - Player2Location
+  - Player1Location
+  - Cone
   layers:
   - Default
   - TransparentFX
@@ -42,6 +47,12 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: UI
+    uniqueID: 4175031051
+    locked: 0
+  - name: CutsceneRobot
+    uniqueID: 1629856053
     locked: 0
   - name: Cutscene
     uniqueID: 2801436859
