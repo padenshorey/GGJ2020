@@ -84,6 +84,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: f5c3cc81ff3b80b40ac325123a6314ef,
         type: 3}
+    - target: {fileID: 4083356492000563212, guid: 65b81235aff0c954aaf23ad4c9f7da24,
+        type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: f1a65daa161f1954abadc28e41e3a119,
+        type: 3}
     - target: {fileID: 2464441347571391980, guid: 65b81235aff0c954aaf23ad4c9f7da24,
         type: 3}
       propertyPath: m_Sprite
@@ -96,17 +102,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: eace844bded3f074f968903a5bd3a967,
         type: 3}
-    - target: {fileID: 4083356492000563212, guid: 65b81235aff0c954aaf23ad4c9f7da24,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: f1a65daa161f1954abadc28e41e3a119,
-        type: 3}
     - target: {fileID: 5499929743098154495, guid: 65b81235aff0c954aaf23ad4c9f7da24,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 2572b0463ab4e7647a20496e1b1258cc,
         type: 3}
+    - target: {fileID: 2391731002351761923, guid: 65b81235aff0c954aaf23ad4c9f7da24,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 65b81235aff0c954aaf23ad4c9f7da24, type: 3}

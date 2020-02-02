@@ -26,7 +26,7 @@ public class Drone : MonoBehaviour
         }
         else
         {
-            team2Icon.transform.localPosition = new Vector3(team1Icon.transform.localPosition.x, newYPosition, team1Icon.transform.localPosition.z);
+            team2Icon.transform.localPosition = new Vector3(team2Icon.transform.localPosition.x, newYPosition, team2Icon.transform.localPosition.z);
         }
     }
 }

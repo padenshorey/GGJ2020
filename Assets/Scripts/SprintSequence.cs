@@ -46,7 +46,7 @@ public class SprintSequence : MonoBehaviour
         else
         {
             GameManager.instance.team2CurrentRound++;
-            GameManager.instance.drone.SetPosition(1, GameManager.instance.team2CurrentRound, GameManager.instance.TotalRounds);
+            GameManager.instance.drone.SetPosition(2, GameManager.instance.team2CurrentRound, GameManager.instance.TotalRounds);
 
         }
 
