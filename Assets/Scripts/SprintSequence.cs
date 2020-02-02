@@ -15,10 +15,16 @@ public class SprintSequence : MonoBehaviour
     private List<SprintInput> _sprintInputSequence = new List<SprintInput>();
     private bool _canMash = false;
 
+    //private ButtonIcon 
+
+    public ButtonIcon buttonIcon;
+
     public delegate void EventHandler(int team);
     public event EventHandler OnSprintComplete;
 
     private AudioManager audioManager;
+
+    private int buttonsLeft = 5;
 
     public void Setup(SprintData sprintData, int team)
     {
@@ -26,6 +32,7 @@ public class SprintSequence : MonoBehaviour
 
         _teamId = team;
         GenerateSprintInputs(sprintData);
+        totalText.text = "x " + sprintData.numberOfPressesRequired.ToString();
         StartSprint();
     }
 
@@ -64,7 +71,12 @@ public class SprintSequence : MonoBehaviour
                 audioManager.PlaySound("steps");
 
                 _sprintInputSequence[_currentSprintSequenceIndex].ButtonPressCount++;
-                totalText.text = _sprintInputSequence[_currentSprintSequenceIndex].ButtonPressCount.ToString();
+
+                //int poop = _sprintInputSequence[_currentSprintSequenceIndex].ButtonPressTarget;                
+
+                buttonsLeft--;
+                totalText.text = "x " + buttonsLeft;
+
                 if (_sprintInputSequence[_currentSprintSequenceIndex].ButtonPressCount >= _sprintInputSequence[_currentSprintSequenceIndex].ButtonPressTarget)
                 {
                     OnStepComplete();
@@ -90,7 +102,8 @@ public class SprintSequence : MonoBehaviour
     {
         //disable it all for 2 seconds
         _canMash = false;
-        totalText.text = "0";
+        //totalText.text = "0";
+
         foreach (Transform child in transform)
         {
             child.gameObject.SetActive(false);
@@ -103,7 +116,12 @@ public class SprintSequence : MonoBehaviour
         {
             child.gameObject.SetActive(true);
         }
+
+        buttonIcon.SetImage(_sprintInputSequence[_currentSprintSequenceIndex].ButtonToMash);
+
         inputText.text = _sprintInputSequence[_currentSprintSequenceIndex].ButtonToMash;
+        buttonsLeft = _sprintInputSequence[_currentSprintSequenceIndex].ButtonPressTarget;
+        totalText.text = "x " + buttonsLeft.ToString();
         _canMash = true;
     }
 
