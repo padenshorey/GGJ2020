@@ -88,7 +88,6 @@ public class SprintSequence : MonoBehaviour
 
     private void OnStepComplete()
     {
-        buttonsLeft = 5;
         _currentSprintSequenceIndex++;
         if(_currentSprintSequenceIndex >= _sprintInputSequence.Count)
         {
@@ -121,6 +120,8 @@ public class SprintSequence : MonoBehaviour
         buttonIcon.SetImage(_sprintInputSequence[_currentSprintSequenceIndex].ButtonToMash);
 
         inputText.text = _sprintInputSequence[_currentSprintSequenceIndex].ButtonToMash;
+        buttonsLeft = _sprintInputSequence[_currentSprintSequenceIndex].ButtonPressTarget;
+        totalText.text = "x " + buttonsLeft.ToString();
         _canMash = true;
     }
 
