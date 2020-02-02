@@ -62,7 +62,6 @@ public class Game
                 GameManager.instance.playersSpawner01.SetActive(true);
                 GameManager.instance.playersSpawner02.SetActive(true);
 
-                Debug.Log("_currentSprintTeam1 set to " + _currentSprintTeam1);
                 if (_currentSprintTeam1 >= GameManager.instance.SprintData.Length)
                 {
                     EndGame(1);
@@ -99,7 +98,7 @@ public class Game
         //TODO: Handle end game animations (or whatever we want to happen).
         Debug.Log("TEAM " + winningTeamId + " WINS!");
 
-        GameManager.instance.EndGame();
+        GameManager.instance.EndGame(winningTeamId);
     }
 
     public void CheckRoundsComplete(int team)
@@ -168,7 +167,6 @@ public class Game
 
         Round currentRound = new Round(roundNumber, teamId, GameManager.instance.RoundData[roundNumber - 1].RoundDuration, GameManager.instance.RoundData[roundNumber - 1].InstructionCardCount);
 
-        Debug.Log(currentRound.RoundNumber);
 
         if (currentRound.RoundNumber >= 1) {
             if (teamId == 1) {

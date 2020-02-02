@@ -114,23 +114,27 @@ public class PlayerController : MonoBehaviour {
             ReadyUp();
         }else if(canMoveCanvasPlayer)
         {
-            if(Input.GetAxis(_controller.joyRightVert) > 0.75f)
+            if(Input.GetAxis(_controller.joyRightVert) > 0.75f ||
+                Input.GetAxis(_controller.joyLeftVert) > 0.75f)
             {
                 //try to move up
                 MoveCanvasPlayerDown();
             }
-            else if (Input.GetAxis(_controller.joyRightVert) < -0.75f)
+            else if (Input.GetAxis(_controller.joyRightVert) < -0.75f ||
+                Input.GetAxis(_controller.joyLeftVert) < -0.75f)
             {
                 //try to move down
                 MoveCanvasPlayerUp(); 
             }
 
-            if (Input.GetAxis(_controller.joyRightHori) > 0.75f)
+            if (Input.GetAxis(_controller.joyRightHori) > 0.75f ||
+                Input.GetAxis(_controller.joyLeftHori) > 0.75f)
             {
                 //try to move right
                 MoveCanvasPlayerRight();
             }
-            else if (Input.GetAxis(_controller.joyRightHori) < -0.75f)
+            else if (Input.GetAxis(_controller.joyRightHori) < -0.75f ||
+                Input.GetAxis(_controller.joyLeftHori) < -0.75f)
             {
                 //try to move left
                 MoveCanvasPlayerLeft();

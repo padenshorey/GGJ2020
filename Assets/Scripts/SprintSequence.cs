@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class SprintSequence : MonoBehaviour
 {
-    private const float TIME_BETWEEN_MASHES = 2f;
+    private const float TIME_BETWEEN_MASHES = 1f;
 
     public Text inputText;
     public Text totalText;
@@ -86,8 +86,10 @@ public class SprintSequence : MonoBehaviour
                 
                 if (_teamId == 1) {
                     myRobot= GameManager.instance.robot1;
+                    GameManager.instance.blueSpeedLineManager.ShowSpeedLine();
                 } else {
                     myRobot = GameManager.instance.robot2;
+                    GameManager.instance.redSpeedLineManager.ShowSpeedLine();
                 }
 
                 myRobot.GetComponent<SpriteRenderer>().sprite = myRobot.GetComponent<SpriteRenderer>().sprite == myRobot.GetComponent<RobotStates>().robotRun2 ?  myRobot.GetComponent<RobotStates>().robotRun1 :  myRobot.GetComponent<RobotStates>().robotRun2;
@@ -113,7 +115,11 @@ public class SprintSequence : MonoBehaviour
     private void OnStepComplete()
     {
         _currentSprintSequenceIndex++;
-        if(_currentSprintSequenceIndex >= _sprintInputSequence.Count)
+
+        GameManager.instance.blueSpeedLineManager.HideSpeedLines();
+        GameManager.instance.redSpeedLineManager.HideSpeedLines();
+
+        if (_currentSprintSequenceIndex >= _sprintInputSequence.Count)
         {
             EndSprint();
             return;
@@ -151,9 +157,7 @@ public class SprintSequence : MonoBehaviour
 
     private void EndSprint()
     {
-        //Debug.Log("Ending Sprint for Team " + _teamId);
-
-        
+        //Debug.Log("Ending Sprint for Team " + _teamId);        
 
         OnSprintComplete(_teamId);
         Destroy(this.gameObject);

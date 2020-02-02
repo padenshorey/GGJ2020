@@ -43,6 +43,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c1f17b50a663e344eb797b65d54bf01b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  introScene: {fileID: 2851469065492961430, guid: 900a996c9b764e34ba2df36d98d9c395,
+    type: 3}
   blueRepaired: {fileID: 1825557864215770592, guid: 2ba61e30af94eb4439a519b82f7aed80,
     type: 3}
   redRepared: {fileID: 9183451258918703983, guid: 5d8ffc9c5b185bd438e88e2ae6c269de,

@@ -48,7 +48,6 @@ public class Round
         {
             GameManager.instance.team2CurrentRound++;
             GameManager.instance.drone.SetPosition(2, GameManager.instance.team2CurrentRound, GameManager.instance.TotalRounds);
-
         }
 
 
