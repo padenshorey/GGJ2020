@@ -11,6 +11,7 @@ public class Game
     private int _currentSprintTeam1 = 0;
     private int _currentSprintTeam2 = 0;
 
+    //public AudioManager audioManager;
     public PlayerController player;
 
     private List<Round> _team1CompletedRounds = new List<Round>();
@@ -97,6 +98,8 @@ public class Game
     {
         //TODO: Handle end game animations (or whatever we want to happen).
         Debug.Log("TEAM " + winningTeamId + " WINS!");
+
+        GameManager.instance.AudioManager.PlaySound("start");
 
         GameManager.instance.EndGame();
     }

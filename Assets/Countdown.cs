@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Countdown : MonoBehaviour
 {
+
+    public AudioManager audioManager;
+
     public void StartGame()
     {
         GameManager.instance.StartGame();
@@ -12,8 +15,11 @@ public class Countdown : MonoBehaviour
         GameObject.FindGameObjectWithTag("DividerLine").GetComponent<SpriteRenderer>().enabled = true;
     }
 
+    void Start() {
+        audioManager = audioManager = FindObjectOfType<AudioManager>();
+    }
     public void PlaySound()
     {
-        //todo - playsound
+        audioManager.PlaySound("beeps");
     }
 }

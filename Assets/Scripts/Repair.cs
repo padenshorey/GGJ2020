@@ -11,6 +11,7 @@ public class Repair
     private bool _isComplete = false;
     public bool IsComplete { get { return _isComplete; } }
 
+
     private Enums.RepairType _repairType;
 
     public Dictionary<string, Enums.RepairType> repairRequirements = new Dictionary<string, Enums.RepairType>();
@@ -20,8 +21,6 @@ public class Repair
         GenerateRepairRequirements();
     }
 
-
-
     public bool CheckForCompletion(XboxController controller1, XboxController controller2 = null)
     {
         _isComplete = true;
@@ -30,6 +29,7 @@ public class Repair
 
         foreach (KeyValuePair<string, Enums.RepairType> keyValuePair in repairRequirements)
         {
+
             if (keyValuePair.Value == Enums.RepairType.StickDirection)
             {
                 if (Input.GetAxisRaw(controller1.dpadHori) == Enums.StickRepairDirectionValues[keyValuePair.Key][0] &&

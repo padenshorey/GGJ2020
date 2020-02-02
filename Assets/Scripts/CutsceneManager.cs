@@ -10,13 +10,24 @@ public class CutsceneManager : MonoBehaviour
     public GameObject blueToTimeFix;
     public GameObject redToTimeFix;
 
+    private AudioManager audioManager;
+
+    void Start () {
+        audioManager = FindObjectOfType<AudioManager>();
+    }
+
     public void SpawnCutscene(int team, Enums.Cutscene cutscene)
     {
         GameObject currentCutscene;
 
+        audioManager.PlaySound("wooshes");
+
         switch (cutscene)
         {
             case Enums.Cutscene.Repair:
+                
+                audioManager.PlaySound("goodScreams");
+
                 if(team == 1)
                 {
                     currentCutscene = Instantiate(blueRepaired);
@@ -28,6 +39,10 @@ public class CutsceneManager : MonoBehaviour
                 Destroy(currentCutscene, 2.5f);
                 break;
             case Enums.Cutscene.Broken:
+                audioManager.PlaySound("startRepair");
+                audioManager.PlaySound("dies");
+                audioManager.PlaySound("badScreams");
+
                 if (team == 1)
                 {
                     currentCutscene = Instantiate(blueToTimeFix);

@@ -56,7 +56,6 @@ public class GameManager : MonoBehaviour {
     public GameObject playersSpawner04;
 
 
-
     void Awake () {
         if (instance == null)
             instance = this;
@@ -117,6 +116,8 @@ public class GameManager : MonoBehaviour {
         
         foreach (PlayerController pc in team1)
         {
+
+
             if (!pc.ReadyToPlay) startGame = false;
         }
 
@@ -157,6 +158,7 @@ public class GameManager : MonoBehaviour {
         {
             if (Input.GetButtonDown("A_" + i) && !PlayerHasSpawned(i))
             {
+                audioManager.PlaySound("beeps");
                 SpawnPlayer(i);
             }
         }

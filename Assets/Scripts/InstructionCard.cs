@@ -26,12 +26,18 @@ public class InstructionCard : MonoBehaviour
 
     private List<XboxController> teamControllers = new List<XboxController>();
 
+    private AudioManager audioManager;
+
     void Update()
     {
         if(isSelected)
         {
             if(!_isComplete && _canRepair) CheckForInput();
         } 
+    }
+
+    void Start() {
+        audioManager = FindObjectOfType<AudioManager>();
     }
 
     private void FinishInstructionCard()
@@ -43,6 +49,9 @@ public class InstructionCard : MonoBehaviour
 
     private void CheckForInput()
     {
+
+        
+
         // make sure the input is done in sequence according to the repair order
 
         // check to see if the repair is complete
@@ -52,6 +61,7 @@ public class InstructionCard : MonoBehaviour
         {
             foreach (XboxController controller in teamControllers)
             {
+
                 if (!repairComplete)
                 {
                     foreach (PlayerController pc in _teamId == 1 ? GameManager.instance.team1 : GameManager.instance.team2)
@@ -75,6 +85,9 @@ public class InstructionCard : MonoBehaviour
         // if the repair is complete, continue to the next repair or finish the instruction card
         if(repairComplete)
         {
+
+            audioManager.PlaySound("instructionCardComplete");
+
             //Debug.Log("Repair Complete: " + _repairs[_currentRepairStep].repairRequirements);
             currentInstructionCard.IncreaseStep();
             if (AllRepairsComplete())
