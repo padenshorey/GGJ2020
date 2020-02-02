@@ -127,9 +127,24 @@ public class GameManager : MonoBehaviour {
 
         if(startGame)
         {
-            GameObject countdownObject = GameObject.FindGameObjectWithTag("Countdown");
-            countdownObject.GetComponent<SpriteRenderer>().enabled = true;
-            countdownObject.GetComponent<Animator>().enabled = true;
+            GameObject pressReadyUI = GameObject.FindGameObjectWithTag("PressStartUI");
+            if (pressReadyUI == null)
+                Debug.Log("Missing Main Menu UI");
+            else
+                pressReadyUI.GetComponent<Animator>().Play("hide-pressStart");
+            bool isAnimPlaying = pressReadyUI.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("hide-pressStart");
+
+            if (isAnimPlaying)
+             {
+                Debug.Log("Anim done!");
+                GameObject countdownObject = GameObject.FindGameObjectWithTag("Countdown");
+                countdownObject.GetComponent<Animator>().enabled = true;
+                countdownObject.GetComponent<SpriteRenderer>().enabled = true;
+            
+
+            }
+           
+
         }
 
 
@@ -140,7 +155,7 @@ public class GameManager : MonoBehaviour {
     private void SetupPlayers() {
         for (int i = 1; i < MAX_PLAYERS + 1; i++)
         {
-            if (Input.GetButtonDown("Start_" + i) && !PlayerHasSpawned(i))
+            if (Input.GetButtonDown("A_" + i) && !PlayerHasSpawned(i))
             {
                 SpawnPlayer(i);
             }
