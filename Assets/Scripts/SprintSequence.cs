@@ -64,10 +64,22 @@ public class SprintSequence : MonoBehaviour
 
     private void CheckCurrentInput()
     {
+        
         foreach(XboxController controller in GameManager.instance.GetTeamControllers(_teamId))
         {
+
             if(Input.GetButtonDown(_sprintInputSequence[_currentSprintSequenceIndex].ButtonToMash + controller.controllerId))
             {
+                GameObject myRobot;
+                
+                if (_teamId == 1) {
+                    myRobot= GameManager.instance.robot1;
+                } else {
+                    myRobot = GameManager.instance.robot2;
+                }
+
+                myRobot.GetComponent<SpriteRenderer>().sprite = myRobot.GetComponent<SpriteRenderer>().sprite == myRobot.GetComponent<RobotStates>().robotRun2 ?  myRobot.GetComponent<RobotStates>().robotRun1 :  myRobot.GetComponent<RobotStates>().robotRun2;
+
                 audioManager.PlaySound("steps");
 
                 _sprintInputSequence[_currentSprintSequenceIndex].ButtonPressCount++;
@@ -128,6 +140,9 @@ public class SprintSequence : MonoBehaviour
     private void EndSprint()
     {
         //Debug.Log("Ending Sprint for Team " + _teamId);
+
+        
+
         OnSprintComplete(_teamId);
         Destroy(this.gameObject);
     }

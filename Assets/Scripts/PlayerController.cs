@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour {
+    public static GameManager instance = null;
     private XboxController _controller;
     public XboxController Controller { get { return _controller; } }
     private int _controllerId;
@@ -25,6 +26,8 @@ public class PlayerController : MonoBehaviour {
     public int currentSelectedColumn = 0;
 
     public Image canvasPlayer;
+
+    public Game game;
 
     private List<InstructionCard> currentInstructionCards;
     public InstructionCard currentlySelectedInstructionCard;
@@ -63,6 +66,7 @@ public class PlayerController : MonoBehaviour {
         canvasPlayer = myCanvasPlayer.GetComponent<Image>();
         canvasPlayer.sprite = _sprite.sprite;
         canvasPlayer.preserveAspect = true;
+
         canvasPlayer.enabled = false;
 
         SetupControls(_controllerId);
