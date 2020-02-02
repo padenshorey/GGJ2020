@@ -99,8 +99,6 @@ public class Game
         //TODO: Handle end game animations (or whatever we want to happen).
         Debug.Log("TEAM " + winningTeamId + " WINS!");
 
-        GameManager.instance.AudioManager.PlaySound("start");
-
         GameManager.instance.EndGame();
     }
 

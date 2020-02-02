@@ -99,6 +99,8 @@ public class GameManager : MonoBehaviour {
 
     public void EndGame()
     {
+        audioManager.PlaySound("start");
+
         StartCoroutine(ResetGame());
     }
 
