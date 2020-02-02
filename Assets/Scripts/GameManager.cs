@@ -111,7 +111,7 @@ public class GameManager : MonoBehaviour {
 
     public void CheckGameStart()
     {
-        //if (PlayerCount < 2) return;
+        if (PlayerCount < 2) return;
 
         bool startGame = true;
         
