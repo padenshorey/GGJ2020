@@ -77,13 +77,33 @@ public class Game
         if (team == 1 )
         {
             _team1CompletedRounds.Add(_currentRoundTeam1);
+            HideRepairAvatarsForTeam(1);
             GameManager.instance.CutsceneManager.SpawnCutscene(1, Enums.Cutscene.Repair);
             StartNextSprintSequence(1);
         }else
         {
             GameManager.instance.CutsceneManager.SpawnCutscene(2, Enums.Cutscene.Repair);
+            HideRepairAvatarsForTeam(2);
             _team2CompletedRounds.Add(_currentRoundTeam2);
             StartNextSprintSequence(2);
+        }
+    }
+
+    private void HideRepairAvatarsForTeam(int team)
+    {
+        if(team == 1)
+        {
+            foreach(PlayerController pc in GameManager.instance.team1)
+            {
+                pc.canvasPlayer.SetActive(false);
+            }
+        }
+        else
+        {
+            foreach (PlayerController pc in GameManager.instance.team2)
+            {
+                pc.canvasPlayer.SetActive(false);
+            }
         }
     }
 

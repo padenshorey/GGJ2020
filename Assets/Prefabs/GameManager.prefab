@@ -50,6 +50,8 @@ MonoBehaviour:
   - {fileID: -2399869699165678322, guid: daf13438cfd156c488108463246fb0e1, type: 3}
   - {fileID: 4609612893764936327, guid: 651f8f6eb1e61cb489641d8d9aa29c5e, type: 3}
   - {fileID: -2399869699165678322, guid: cdc7132313fa5754da6505476df7b00f, type: 3}
+  team1: []
+  team2: []
   GameCanvas: {fileID: 0}
   _roundData:
   - {fileID: 11400000, guid: 0b4a68b925d4d3e4a9895b9972ee5403, type: 2}
@@ -94,3 +96,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  drone: {fileID: 0}
+  team1CurrentRound: 0
+  team2CurrentRound: 0

@@ -39,6 +39,18 @@ public class Round
         _roundStarted = true;
         GameManager.instance.AssignPlayersToInstructionFrame(_teamId, _intructions);
 
+        if (_teamId == 1)
+        {
+            GameManager.instance.team1CurrentRound++;
+            GameManager.instance.drone.SetPosition(1, GameManager.instance.team1CurrentRound, GameManager.instance.TotalRounds);
+        }
+        else
+        {
+            GameManager.instance.team2CurrentRound++;
+            GameManager.instance.drone.SetPosition(1, GameManager.instance.team2CurrentRound, GameManager.instance.TotalRounds);
+
+        }
+
         ////Debug.Log("Starting round " + _roundNumber + " for Team " + _teamId);
     }
 

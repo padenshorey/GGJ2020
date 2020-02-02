@@ -38,6 +38,18 @@ public class SprintSequence : MonoBehaviour
 
     private void StartSprint()
     {
+        if (_teamId == 1)
+        {
+            GameManager.instance.team1CurrentRound++;
+            GameManager.instance.drone.SetPosition(1, GameManager.instance.team1CurrentRound, GameManager.instance.TotalRounds);
+        }
+        else
+        {
+            GameManager.instance.team2CurrentRound++;
+            GameManager.instance.drone.SetPosition(1, GameManager.instance.team2CurrentRound, GameManager.instance.TotalRounds);
+
+        }
+
         StartCoroutine(ActivateUserInput());
     }
 

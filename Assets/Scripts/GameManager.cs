@@ -34,8 +34,15 @@ public class GameManager : MonoBehaviour {
     private SprintData[] _sprintData = null;
     public SprintData[] SprintData { get { return _sprintData; } }
 
+    public int TotalRounds { get { return _sprintData.Length + _roundData.Length; } }
+
     public InstructionCardFrame[] instructionCardFramesTeam1;
     public InstructionCardFrame[] instructionCardFramesTeam2;
+
+    public Drone drone;
+
+    public int team1CurrentRound = 0;
+    public int team2CurrentRound = 0;
 
     void Awake () {
         if (instance == null)
@@ -57,6 +64,7 @@ public class GameManager : MonoBehaviour {
     public void StartGame()
     {
         //Debug.Log("STARTING GAME");
+        drone.GetComponent<Animator>().SetTrigger("Start");
         _currentGame = new Game(_roundData.Length);
     }
 
