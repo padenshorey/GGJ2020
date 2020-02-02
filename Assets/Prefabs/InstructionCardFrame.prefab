@@ -352,7 +352,7 @@ MonoBehaviour:
   backgroundFill: {fileID: 6842729266098991271}
   instructionTypeImage: {fileID: 8540486444566554031}
   soloInstruction: {fileID: 21300000, guid: bc6f2e1ba9162cd4c8e996c6ddc1af19, type: 3}
-  teamInstruction: {fileID: 21300000, guid: 23f7c39543a227548964dffcdff671ee, type: 3}
+  teamInstruction: {fileID: 21300000, guid: 7c83a86a994966245b53d471ee78d4d9, type: 3}
   instructionCard: {fileID: 0}
   columnId: 0
   rowId: 0
